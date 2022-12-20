@@ -1,0 +1,88 @@
+@model LayoutViewModel
+@{
+    // use for show active link
+    var path = Context.Request.Path;
+    var pathname = path.Value.Split('/')[1];
+
+    // task counts
+    var count = Model._taskcount.ToList();
+
+    // user name and role
+    var username = Model.user_name;
+    var role = Model.role;
+}
+<div class="nav_links">
+    @if (role)
+    {
+        <a class="n_link @((pathname == "new-task") ? "l_active" : null)" role="link" asp-action="new-task"
+        asp-controller="task">
+            <div class="link_title">
+                <span class="material-symbols-outlined icon">
+                    add
+                </span>
+                New Task
+            </div>
+        </a>
+    }
+    <a class="n_link @((pathname == "tasks") ? "l_active" : null)" role="link" asp-action="/tasks"
+        asp-controller="task">
+        <div class="link_title">
+            <span class="material-symbols-outlined icon">
+                fact_check
+            </span>
+            All Tasks
+        </div>
+        <small class="tsk_count" id="all-task">@count[0].all_task</small>
+    </a>
+    <a class="n_link @((pathname == "pending") ? "l_active" : null)" role="link" asp-action="pending"
+        asp-controller="task">
+        <div class="link_title">
+            <span class="material-symbols-outlined icon">
+                schedule
+            </span>
+            Pending
+        </div>
+        <small class="tsk_count" id="pen-task">@count[0].pendings</small>
+    </a>
+    <a class="n_link @((pathname == "complete") ? "l_active" : null)" role="link" asp-action="complete"
+        asp-controller="task">
+        <div class="link_title">
+            <span class="material-symbols-outlined icon">
+                assignment_turned_in
+            </span>
+            Complete
+        </div>
+        <small class="tsk_count" id="com-task">@count[0].complete</small>
+    </a>
+    <div class="break"></div>
+    <a class="n_link @((pathname == "h-priority") ? "l_active" : null)" role="link" asp-action="h-priority"
+        asp-controller="task">
+        <div class="link_title">
+            <span class="material-symbols-outlined icon">
+                assignment_late
+            </span>
+            High Priority
+        </div>
+        <small class="tsk_count" id="hig-task">@count[0].high</small>
+    </a>
+    <a class="n_link @((pathname == "m-priority") ? "l_active" : null)" role="link" asp-action="m-priority"
+        asp-controller="task">
+        <div class="link_title">
+            <span class="material-symbols-outlined icon">
+                assignment_late
+            </span>
+            Medium Priority
+        </div>
+        <small class="tsk_count" id="med-task">@count[0].medium</small>
+    </a>
+    <a class="n_link @((pathname == "l-priority") ? "l_active" : null)" role="link" asp-action="l-priority"
+        asp-controller="task">
+        <div class="link_title">
+            <span class="material-symbols-outlined icon">
+                assignment_late
+            </span>
+            Low Priority
+        </div>
+        <small class="tsk_count" id="low-task">@count[0].low</small>
+    </a>
+</div>

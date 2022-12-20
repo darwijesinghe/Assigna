@@ -1,0 +1,151 @@
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery xToken
+@model TaskViewModel
+@{
+    ViewBag.Title = "Task Info";
+    var info = Model._taskinfo.ToList();
+
+}
+@functions
+{
+    // generate antiforgery token
+    public string ForgeryToken()
+    {
+        var token = xToken.GetAndStoreTokens(Context).RequestToken;
+        return token;
+    }
+}
+<!-- view task -->
+<section class="view_task section">
+    <h3 class="section_tit">Task Info</h3>
+    <div class="view_content" id="view-content">
+        @if (info.Count == 0)
+        {
+            <span class="no_task">No task information was found, Maybe it was deleted</span>
+            <a asp-action="tasks" asp-controller="task" class="back_tasks link_button" role="link">Back to Tasks</a>
+        }
+        else
+        {
+            var task = info[0];
+
+            <table class="view_table">
+                <tr>
+                    <td class="view_t_header">
+                        <span>Title</span>
+                    </td>
+                    <td class="view_t_data col_padding">
+                        <p>@task.tsk_title</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="view_t_header">
+                        <span>Category</span>
+                    </td>
+                    <td class="view_t_data col_padding">
+                        <p>@task.cat_name</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="view_t_header">
+                        <span>Deadline</span>
+                    </td>
+                    <td class="view_t_data col_padding">
+                        <p>@task.deadline.ToString("yyyy-MM-dd")</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="view_t_header">
+                        <span>Priority</span>
+                    </td>
+                    <td class="view_t_data col_padding">
+                        @{
+                            string priority = (@task.prio_high) ? "High" : (@task.prio_medium) ? "Medium" : "Low";
+                        }
+                        <p>@priority priority task</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="view_t_header">
+                        <span>Assigned To</span>
+                    </td>
+                    <td class="view_t_data col_padding">
+                        <p>@task.first_name</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="view_t_header">
+                        <span>Task Note</span>
+                    </td>
+                    <td class="view_t_data col_padding">
+                        <p>@task.tsk_note</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="view_t_header">
+                        <span>Status</span>
+                    </td>
+                    <td class="view_t_data col_padding">
+                        @{
+                            string status = (@task.pending) ? "Pending" : "Completed";
+                        }
+                        <p id="ts-status">@status</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="view_t_header">
+                        <span>Note</span>
+                    </td>
+                    <td class="view_t_data">
+                        @{
+                            string userNote = string.IsNullOrEmpty(@task.user_note) ? "User note is not available" :
+                @task.user_note;
+                        }
+                        <p>@userNote</p>
+                    </td>
+                </tr>
+            </table>
+            <div class="view_actions">
+                @if (User.IsInRole(Roles.member))
+                {
+                    <!-- for user -->
+                    if (task!.complete)
+                    {
+                        <a id="add-note" class="link_button" role="link" asp-action="#?" disabled>Add Note</a>
+                        <button class="button" id="done-task" role="button" value="@task.tsk_id" disabled>Task Done</button>
+                    }
+                    else
+                    {
+                        <a id="add-note" class="link_button" role="link" asp-action="add-note" asp-controller="task"
+                asp-route-taskid="@task.tsk_id">Add
+                            Note</a>
+                        <button class="button" id="done-task" role="button" value="@task.tsk_id">Task Done</button>
+                    }
+
+                }
+                @if (User.IsInRole(Roles.lead))
+                {
+                    <!-- for admin -->
+                    if (task!.complete)
+                    {
+                        <a class="link_button" role="link" asp-action="edit-task" asp-controller="task"
+                asp-route-taskid="@task.tsk_id" disabled>Edit
+                        </a>
+                    }
+                    else
+                    {
+                        <a class="link_button" role="link" asp-action="edit-task" asp-controller="task"
+                asp-route-taskid="@task.tsk_id">Edit
+                        </a>
+                    }
+                    <button class="outline_button send_remind" id="send-remind" role="button" data-id="@task.tsk_id"
+                data-name="@task.first_name" data-token="@ForgeryToken()">Remind</button>
+                    <button class="button" id="delete-task" role="button" value="@task.tsk_id">Delete</button>
+                }
+            </div>
+        }
+    </div>
+</section>
+@section scripts{
+<!-- scripts -->
+<script type="module" src="~/js/task-done.js" asp-append-version="true"></script>
+<script type="module" src="~/js/delete-task.js" asp-append-version="true"></script>
+}

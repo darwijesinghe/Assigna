@@ -1,0 +1,56 @@
+@model TaskViewModel.AddNoteViewModel
+@{
+    ViewBag.Title = "Assignee Note";
+    var info = Model._taskinfo.ToList()[0];
+}
+
+<!-- add user note -->
+<section class="user_note section">
+    <h3 class="section_tit">Add Assignee Note</h3>
+    <div class="note_content">
+        <table class="view_table">
+            <tr>
+                <td class="view_t_header">
+                    <span>Title</span>
+                </td>
+                <td class="view_t_data col_padding">
+                    <p>@info.tsk_title</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="view_t_header">
+                    <span>Deadline</span>
+                </td>
+                <td class="view_t_data col_padding">
+                    <p>@info.deadline.ToString("yyyy-MM-dd")</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="view_t_header">
+                    <span>My Note</span>
+                </td>
+                <td class="view_t_data">
+                    @{
+                        string userNote = string.IsNullOrEmpty(@info.user_note) ? "User note is not available" :
+            @info.user_note;
+                    }
+                    <p id="new-note">@userNote</p>
+                </td>
+            </tr>
+        </table>
+        <form id="user-note" asp-antiforgery="true">
+            <div class="input_control">
+                <input type="hidden" asp-for="tsk_id" value="@info.tsk_id">
+                <textarea id="as-note" role="textbox" rows="5" asp-for="user_note" placeholder="Write Note"></textarea>
+                <span class="val_msg"></span>
+            </div>
+            <div class="save-button">
+                <button class="button" type="submit" role="button">Add Note</button>
+            </div>
+        </form>
+    </div>
+</section>
+@section scripts{
+<!-- scripts -->
+<script type="module" src="~/js/add-note.js" asp-append-version="true"></script>
+}

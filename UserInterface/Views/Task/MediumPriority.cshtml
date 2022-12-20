@@ -1,0 +1,48 @@
+@model TaskViewModel
+@{
+    ViewBag.Title = "Medium Priority";
+    var tasks = Model._mpriority.ToList();
+}
+
+<!-- medium priority tasks -->
+<section class="all_task section">
+    <h3 class="section_tit">Medium Priority Tasks</h3>
+    <!-- task card & no result -->
+    <div class="task_content">
+        @{
+            if (tasks.Count == 0)
+            {
+                <span class="no_task">No tasks available at this time</span>
+            }
+            else
+            {
+                <div class="task_list">
+                    @foreach (var item in tasks)
+                    {
+                        <div class="task_card">
+                            <a asp-action="task-info" asp-controller="task" asp-route-taskid="@item.tsk_id" class="t_header ellips"
+                    role="link">@item.tsk_title</a>
+                            <div>
+                                <p class="t_date">Due : @item.deadline.ToString("yyyy-MM-dd")</p>
+                                <p class="t_assign">
+                                    <span>Assigned to <strong>@item.first_name</strong></span>
+                                </p>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        }
+    </div>
+    @if (Context.User.IsInRole(Roles.lead))
+    {
+        <div class="new_t_link">
+            <a asp-action="new-task" asp-controller="task" class="icon_button" role="link">
+                <span class="material-symbols-outlined">
+                    add
+                </span>
+                New Task
+            </a>
+        </div>
+    }
+</section>

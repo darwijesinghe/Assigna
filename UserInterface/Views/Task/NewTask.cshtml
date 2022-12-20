@@ -1,0 +1,83 @@
+@model TaskViewModel.NewTaskViewModel
+@{
+    ViewBag.Title = "New Tasks";
+    var category = Model._category.ToList();
+    var users = Model._users.ToList();
+}
+
+<!-- add a task -->
+<section class="new_task section">
+    <h3 class="section_tit">New Task</h3>
+    <div class="task_form">
+        <form id="task" asp-action="#?" asp-antiforgery="true" novalidate>
+            <div class="input_control">
+                <input type="text" id="tsk-title" role="textbox" asp-for="tsk_title" placeholder="Task Title">
+                <span class="val_msg"></span>
+            </div>
+            <div class="input_control">
+                <div class="select" id="tsk-cate-parent">
+                    <select id="tsk-category" required title="&nbsp;" role="combobox" asp-for="tsk_category">
+                        <option value="@string.Empty" selected>Task Category</option>
+                        @foreach (var item in category)
+                        {
+                            <option value="@item.cat_id">@item.cat_name</option>
+                        }
+                    </select>
+                    <div class="select-arrow"></div>
+                </div>
+                <span id="val-category" class="val_msg"></span>
+            </div>
+            <div class="input_control">
+                <div class="date" id="tsk-date-parent">
+                    <small class="place_holder">Due Date</small>
+                    <input type="date" id="tsk-date" required title="&nbsp;" max="9999-12-31" asp-for="deadline">
+                </div>
+                <span class="val_msg"></span>
+            </div>
+            <div class="input_control">
+                <div class="select" id="tsk-assign-parent">
+                    <select id="tsk-assign" required title="&nbsp;" role="combobox" asp-for="assign_to">
+                        <option value="@string.Empty" selected>Assign To</option>
+                        @foreach (var item in users)
+                        {
+                            <option value="@item.user_id">@item.first_name</option>
+                        }
+                    </select>
+                    <div class="select-arrow"></div>
+                </div>
+                <span id="val-assign" class="val_msg"></span>
+            </div>
+            <div class="input_control pri_level">
+                <div>
+                    <label class="radio">
+                        <input type="radio" role="radio" asp-for="priority" value="High" checked>
+                        High Priority
+                    </label>
+                </div>
+                <div>
+                    <label class="radio">
+                        <input type="radio" role="radio" asp-for="priority" value="Medium">
+                        Medium Priority
+                    </label>
+                </div>
+                <div>
+                    <label class="radio">
+                        <input type="radio" role="radio" asp-for="priority" value="Low">
+                        Low Priority
+                    </label>
+                </div>
+            </div>
+            <div class="input_control task_note">
+                <textarea id="tsk-note" rows="5" role="textbox" asp-for="tsk_note" placeholder="Task Note"></textarea>
+                <span class="val_msg"></span>
+            </div>
+            <div class="save-button">
+                <button class="button" type="submit" role="button">Save Task</button>
+            </div>
+        </form>
+    </div>
+</section>
+@section scripts{
+<!-- scripts -->
+<script type="module" src="~/js/new-task.js" asp-append-version="true"></script>
+}

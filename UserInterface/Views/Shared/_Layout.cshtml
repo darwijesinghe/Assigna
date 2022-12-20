@@ -1,0 +1,90 @@
+﻿@using System.Security.Claims
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Assigna" />
+    <!-- main css -->
+    <link rel="stylesheet" type="text/css" asp-append-version="true" href="~/css/site.css" />
+    <!-- google fonts cdn -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <!-- title -->
+    <title>@ViewBag.Title - Assigna</title>
+    <!-- favicon -->
+    <link rel="icon" href="~/favicon.ico" />
+</head>
+
+<body class="body_space">
+    <!-- header -->
+    <header class="header container">
+        <div class="header_content flex">
+            <a asp-action="" asp-controller="" class="app_logo">
+                <h3>Assigna</h3>
+            </a>
+            <div class="user_wrap">
+                <div class="user_letter">
+                    <!-- user name first letter -->
+                    @{
+                        var user = User.Identity.IsAuthenticated;
+                        if (user)
+                        {
+                            var letter = User.FindFirst(ClaimTypes.Name).Value;
+                            <span>@letter[0].ToString().ToUpper()</span>
+                        }
+                        else
+                        {
+                            <span>A</span>
+                        }
+                    }
+                </div>
+                <div class="header_toggle">
+                    <span class="material-symbols-outlined icon" id="header-toggle" role="button">
+                        menu
+                    </span>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- navigation -->
+    <div class="navigate" id="navigate">
+        <div class="nav_overlay" id="nav-overlay"></div>
+        <nav class="nav_content" id="nav-content">
+            <div class="nav_list">
+                @await Component.InvokeAsync("Navigate")
+                <div class="break"></div>
+                <div class="log_out">
+                    <a class="n_link" role="link" asp-action="signout" asp-controller="account">
+                        <div class="link_title">
+                            <span class="material-symbols-outlined icon">
+                                logout
+                            </span>
+                            Logout
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <main>
+        <!-- back link -->
+        <div class="go_back section">
+            <button class="icon_button" id="go-back" role="button">
+                <span class="material-symbols-outlined">
+                    arrow_back
+                </span>
+                Go Back
+            </button>
+        </div>
+        @RenderBody()
+    </main>
+    <!-- scripts -->
+    <script type="text/javascript" src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("scripts", required: false)
+</body>
+
+</html>
