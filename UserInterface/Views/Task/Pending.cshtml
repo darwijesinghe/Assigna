@@ -1,7 +1,7 @@
 @model TaskViewModel
 @{
     ViewBag.Title = "Pending";
-    var tasks = Model._pending.ToList();
+    var tasks = Model.Pending.ToList();
 }
 
 <!-- pending task -->
@@ -20,12 +20,12 @@
                     @foreach (var item in tasks)
                     {
                         <div class="task_card">
-                            <a asp-action="task-info" asp-controller="task" asp-route-taskid="@item.tsk_id" class="t_header ellips"
-                    role="link">@item.tsk_title</a>
+                            <a asp-action="task-info" asp-controller="task" asp-route-taskid="@item.TskId" class="t_header ellips"
+                    role="link">@item.TskTitle</a>
                             <div>
-                                <p class="t_date">Due : @item.deadline.ToString("yyyy-MM-dd")</p>
+                                <p class="t_date">Due : @item.Deadline.ToString("yyyy-MM-dd")</p>
                                 <p class="t_assign">
-                                               <span>Assigned to <strong>@item.first_name</strong></span>
+                                               <span>Assigned to <strong>@item.FirstName</strong></span>
                                 </p>
                             </div>
                         </div>

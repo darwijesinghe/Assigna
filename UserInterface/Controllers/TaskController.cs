@@ -17,16 +17,13 @@ namespace UserInterface.Controllers
     {
         // services
         private readonly IDataService _dataService;
-        private UserManager<IdentityUser> _userManager { get; }
-        public IMailService _mailSend { get; }
-        private SignInManager<IdentityUser> _signinManager { get; }
-        public TaskController(IDataService dataService, SignInManager<IdentityUser> signinManager,
-        UserManager<IdentityUser> userManager, IMailService mailSend)
+        private UserManager<IdentityUser> UserManager { get; }
+        public IMailService MailSend { get; }
+        public TaskController(IDataService dataService, UserManager<IdentityUser> userManager, IMailService mailSend)
         {
             _dataService = dataService;
-            _signinManager = signinManager;
-            _userManager = userManager;
-            _mailSend = mailSend;
+            UserManager = userManager;
+            MailSend = mailSend;
         }
 
         // landing action
@@ -81,7 +78,7 @@ namespace UserInterface.Controllers
         private async Task<TaskViewModel> TasksList(string type)
         {
             // get user id
-            var user = await _userManager.GetUserAsync(User);
+            var user = await UserManager.GetUserAsync(User);
             var userName = user.UserName;
 
             // checking user role is admin or not
@@ -95,37 +92,37 @@ namespace UserInterface.Controllers
                 case "All":
                     viewModel = new TaskViewModel()
                     {
-                        _tasks = _dataService.AllTasks(userName, role),
+                        Tasks = _dataService.AllTasks(userName, role),
                     };
                     break;
                 case "Pending":
                     viewModel = new TaskViewModel()
                     {
-                        _pending = _dataService.Pendings(userName, role),
+                        Pending = _dataService.Pendings(userName, role),
                     };
                     break;
                 case "Complete":
                     viewModel = new TaskViewModel()
                     {
-                        _complete = _dataService.Completed(userName, role),
+                        Complete = _dataService.Completed(userName, role),
                     };
                     break;
                 case "High":
                     viewModel = new TaskViewModel()
                     {
-                        _hpriority = _dataService.HighPriority(userName, role),
+                        Hpriority = _dataService.HighPriority(userName, role),
                     };
                     break;
                 case "Medium":
                     viewModel = new TaskViewModel()
                     {
-                        _mpriority = _dataService.MediumPriority(userName, role),
+                        Mpriority = _dataService.MediumPriority(userName, role),
                     };
                     break;
                 case "Low":
                     viewModel = new TaskViewModel()
                     {
-                        _lpriority = _dataService.LowPriority(userName, role),
+                        Lpriority = _dataService.LowPriority(userName, role),
                     };
                     break;
             }
@@ -138,7 +135,7 @@ namespace UserInterface.Controllers
         private async Task<TaskCount> TaskCount()
         {
             // get user id
-            var user = await _userManager.GetUserAsync(User);
+            var user = await UserManager.GetUserAsync(User);
             var userName = user.UserName;
 
             // checking user role is admin or not
@@ -148,12 +145,12 @@ namespace UserInterface.Controllers
             var data = _dataService.TaskCount(userName, role)[0];
             return new TaskCount
             {
-                all_task = data.all_task,
-                pendings = data.pendings,
-                complete = data.complete,
-                high = data.high,
-                medium = data.medium,
-                low = data.low
+                AllTask = data.AllTask,
+                Pendings = data.Pendings,
+                Complete = data.Complete,
+                High = data.High,
+                Medium = data.Medium,
+                Low = data.Low
             };
         }
 
@@ -163,8 +160,8 @@ namespace UserInterface.Controllers
         {
             var viewModel = new NewTaskViewModel()
             {
-                _category = _dataService.Categories(),
-                _users = _dataService.Users()
+                Category = _dataService.Categories(),
+                Users = _dataService.Users()
             };
 
             return View(viewModel);
@@ -178,26 +175,26 @@ namespace UserInterface.Controllers
             // send data to save a new task
             var task = new TaskDto()
             {
-                tsk_title = data.tsk_title,
-                deadline = Convert.ToDateTime(data.deadline),
-                tsk_note = data.tsk_note,
-                prio_high = (data.priority == "High") ? true : false,
-                prio_medium = (data.priority == "Medium") ? true : false,
-                prio_low = (data.priority == "Low") ? true : false,
-                cat_id = data.tsk_category,
-                user_id = data.assign_to,
-                pending = true
+                TskTitle = data.TskTitle,
+                Deadline = Convert.ToDateTime(data.Deadline),
+                TskNote = data.TskNote,
+                PrioHigh = (data.Priority == "High"),
+                PrioMedium = (data.Priority == "Medium"),
+                PrioLow = (data.Priority == "Low"),
+                CatId = data.TskCategory,
+                UserId = data.AssignTo,
+                Pending = true
             };
 
             var result = await _dataService.SaveTaskAsync(task);
-            if (result.success)
+            if (result.Success)
             {
                 // task count
                 var count = this.TaskCount();
 
                 return Json(new
                 {
-                    message = "New task was added successfully",
+                    message = "New task was added successfully.",
                     success = true,
                     tasks = count
                 });
@@ -206,7 +203,7 @@ namespace UserInterface.Controllers
             {
                 return Json(new
                 {
-                    message = "Something went wrong, Please try again later",
+                    message = "Something went wrong, Please try again later.",
                     success = false
                 });
             }
@@ -219,7 +216,7 @@ namespace UserInterface.Controllers
         {
             var viewModel = new TaskViewModel()
             {
-                _taskinfo = _dataService.TaskInfo(taskId)
+                Taskinfo = _dataService.TaskInfo(taskId)
             };
 
             return View(viewModel);
@@ -233,22 +230,22 @@ namespace UserInterface.Controllers
             var task = _dataService.TaskInfo(taskId)[0];
 
             // return 404 if task completed
-            if (task.complete)
+            if (task.Complete)
             {
                 return NotFound();
             }
 
             var viewModel = new NewTaskViewModel()
             {
-                tsk_id = task.tsk_id,
-                tsk_title = task.tsk_title ?? string.Empty,
-                tsk_category = task.cat_id,
-                deadline = task.deadline.ToString("yyyy-MM-dd"),
-                priority = (task.prio_high) ? "High" : (task.prio_medium) ? "Medium" : "Low",
-                assign_to = task.user_id,
-                tsk_note = task.tsk_note ?? string.Empty,
-                _category = _dataService.Categories(),
-                _users = _dataService.Users()
+                TskId = task.TskId,
+                TskTitle = task.TskTitle ?? string.Empty,
+                TskCategory = task.CatId,
+                Deadline = task.Deadline.ToString("yyyy-MM-dd"),
+                Priority = (task.PrioHigh) ? "High" : (task.PrioMedium) ? "Medium" : "Low",
+                AssignTo = task.UserId,
+                TskNote = task.TskNote ?? string.Empty,
+                Category = _dataService.Categories(),
+                Users = _dataService.Users()
             };
 
             return View(viewModel);
@@ -263,26 +260,26 @@ namespace UserInterface.Controllers
             // send data to save a new task
             var task = new TaskDto()
             {
-                tsk_id = data.tsk_id,
-                tsk_title = data.tsk_title,
-                deadline = Convert.ToDateTime(data.deadline),
-                tsk_note = data.tsk_note,
-                prio_high = (data.priority == "High") ? true : false,
-                prio_medium = (data.priority == "Medium") ? true : false,
-                prio_low = (data.priority == "Low") ? true : false,
-                cat_id = data.tsk_category,
-                user_id = data.assign_to
+                TskId = data.TskId,
+                TskTitle = data.TskTitle,
+                Deadline = Convert.ToDateTime(data.Deadline),
+                TskNote = data.TskNote,
+                PrioHigh = (data.Priority == "High"),
+                PrioMedium = (data.Priority == "Medium"),
+                PrioLow = (data.Priority == "Low"),
+                CatId = data.TskCategory,
+                UserId = data.AssignTo
             };
 
             var result = await _dataService.EditTaskAsync(task);
-            if (result.success)
+            if (result.Success)
             {
                 // task count
                 var count = this.TaskCount();
 
                 return Json(new
                 {
-                    message = "Task was updated successfully",
+                    message = "Task was updated successfully.",
                     success = true,
                     tasks = count
                 });
@@ -291,7 +288,7 @@ namespace UserInterface.Controllers
             {
                 return Json(new
                 {
-                    message = "Something went wrong, Please try again later",
+                    message = "Something went wrong, Please try again later.",
                     success = false
                 });
             }
@@ -304,16 +301,16 @@ namespace UserInterface.Controllers
         {
 
             var result = await _dataService.DeleteTaskAsync(taskId);
-            if (result.success)
+            if (result.Success)
             {
-                var html = "<span class='no_task'>No task information was found, Maybe it was deleted</span><a href='/tasks' class='back_tasks link_button'>Back to Tasks</a>";
+                var html = "<span class='no_task'>No task information was found, Maybe it was deleted.</span><a href='/tasks' class='back_tasks link_button'>Back to Tasks</a>";
 
                 // task count
                 var count = this.TaskCount();
 
                 return Json(new
                 {
-                    message = "Task was deleted successfully",
+                    message = "Task was deleted successfully.",
                     success = true,
                     result = html,
                     tasks = count
@@ -323,7 +320,7 @@ namespace UserInterface.Controllers
             {
                 return Json(new
                 {
-                    message = "Something went wrong, Please try again later",
+                    message = "Something went wrong, Please try again later.",
                     success = false
                 });
             }
@@ -336,7 +333,7 @@ namespace UserInterface.Controllers
         {
             var viewModel = new AddNoteViewModel()
             {
-                _taskinfo = _dataService.TaskInfo(taskId)
+                Taskinfo = _dataService.TaskInfo(taskId)
             };
 
             return View(viewModel);
@@ -350,26 +347,26 @@ namespace UserInterface.Controllers
             // send data to add task note
             var task = new TaskDto()
             {
-                tsk_id = data.tsk_id,
-                user_note = data.user_note
+                TskId = data.TskId,
+                UserNote = data.UserNote
             };
 
             var result = await _dataService.AddTaskNoteAsync(task);
-            if (result.success)
+            if (result.Success)
             {
 
                 return Json(new
                 {
-                    message = "Your note was added successfully",
+                    message = "Your note was added successfully.",
                     success = true,
-                    result = data.user_note
+                    result = data.UserNote
                 });
             }
             else
             {
                 return Json(new
                 {
-                    message = "Something went wrong, Please try again later",
+                    message = "Something went wrong, Please try again later.",
                     success = false
                 });
             }
@@ -381,14 +378,14 @@ namespace UserInterface.Controllers
         {
 
             var result = await _dataService.MarkasDone(taskId);
-            if (result.success)
+            if (result.Success)
             {
                 // task count
                 var count = this.TaskCount();
 
                 return Json(new
                 {
-                    message = "Task was marked as completed",
+                    message = "Task was marked as completed.",
                     success = true,
                     result = "Completed",
                     tasks = count
@@ -398,7 +395,7 @@ namespace UserInterface.Controllers
             {
                 return Json(new
                 {
-                    message = "Something went wrong, Please try again later",
+                    message = "Something went wrong, Please try again later.",
                     success = false
                 });
             }
@@ -411,22 +408,22 @@ namespace UserInterface.Controllers
         public async Task<JsonResult> SendReminder(RemindViewModel data)
         {
             // get user email
-            var mail = _dataService.TaskInfo(data.task_id)[0].user_mail;
+            var mail = _dataService.TaskInfo(data.TaskId)[0].UserMail;
             if (mail is not null)
             {
                 // mail subject
                 string subject = "Assigna task reminder";
 
                 // mail body
-                string body = data.message ?? string.Empty;
+                string body = data.Message ?? string.Empty;
 
-                var result = await _mailSend.SendMailAsync(mail, subject, body);
-                if (result.success)
+                var result = await MailSend.SendMailAsync(mail, subject, body);
+                if (result.Success)
                 {
                     return Json(new
                     {
                         success = true,
-                        message = "Remind sent successfully"
+                        message = "Remind sent successfully."
                     });
                 }
                 else
@@ -434,7 +431,7 @@ namespace UserInterface.Controllers
                     return Json(new
                     {
                         success = false,
-                        message = "Something went wrong, Please try again later"
+                        message = "Something went wrong, Please try again later."
                     });
                 }
             }
@@ -443,7 +440,7 @@ namespace UserInterface.Controllers
                 return Json(new
                 {
                     success = false,
-                    message = "Something went wrong, Please try again later"
+                    message = "Something went wrong, Please try again later."
                 });
             }
 

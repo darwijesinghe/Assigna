@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Assigna" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" type="text/css" href="./root/style.css">
+    <script defer src="./root/site.js"></script>
+    <title>Assigna</title>
+</head>
+
+<body>
+    <main>
+        <!-- reset password -->
+        <section class="reset_pw fr_center container">
+            <div class="res_content">
+                <h3 class="reset_tit">Password reset</h3>
+                <small class="pw_instruct">Passwords must contain at least eight characters, including
+                    at least 1 letter and
+                    1 number.
+                </small>
+                <form action="" class="res_form">
+                    <div class="input_control">
+                        <input type="password" id="password" role="textbox" placeholder="Password">
+                        <span class="val-msg"></span>
+                    </div>
+                    <div class="input_control">
+                        <input type="password" id="con-pass" role="textbox" placeholder="Confirm Password">
+                        <span class="val-msg"></span>
+                    </div>
+                    <input type="hidden" id="token">
+                    <input type="hidden" id="email">
+                    <button type="submit" class="button" role="button">Reset Now</button>
+                </form>
+                <div class="help">
+                    <span>Go back to <a href="" role="link">Sign In</a></span>
+                </div>
+            </div>
+        </section>
+        <!-- send link to reset -->
+        <!-- <section class="send_rp_link fr_center container">
+            <div class="sen_content">
+                <h3 class="reset_tit">Recover your account</h3>
+                <p class="reset_nt">Forgot your account’s password or having trouble logging into your account?
+                    Enter your email address and we’ll send you a recovery link.</p>
+                <form action="" class="sen_form">
+                    <div class="input_control">
+                        <input type="text" id="mail" role="textbox" placeholder="Email">
+                        <span class="val-msg"></span>
+                    </div>
+                    <button type="submit" class="button" role="button">Send Link</button>
+                </form>
+                <div class="help">
+                    <span>Go back to <a href="" role="link">Sign In</a></span>
+                </div>
+            </div>
+        </section> -->
+    </main>
+</body>
+
+</html>

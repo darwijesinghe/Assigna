@@ -11,10 +11,11 @@ namespace DataLibrary.Data
         }
 
         // tables
-        public DbSet<Category> category { get; set; } = null!;
-
-        public DbSet<Users> users { get; set; } = null!;
-        public DbSet<Task> task { get; set; } = null!;
+#pragma warning disable IDE1006 // Naming Styles
+        public DbSet<Category> category { get; set; }
+        public DbSet<Users> users { get; set; }
+        public DbSet<Task> task { get; set; }
+#pragma warning restore IDE1006 // Naming Styles
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

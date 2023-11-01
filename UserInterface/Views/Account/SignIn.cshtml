@@ -34,11 +34,11 @@
                 <div class="sig_types">
                     <!-- message -->
                     <div id="alert-message">
-                        @if (TempData["alertMessage"] is not null)
+                        @if (TempData["AlertMessage"] is not null)
                         {
                             <div class="alert al_error" role="alert">
                                 <div class="al_content">
-                                    <p id="al_message">@TempData["alertMessage"]</p>
+                                    <p id="al_message">@TempData["AlertMessage"]</p>
                                 </div>
                             </div>
                         }
@@ -66,7 +66,7 @@
                     <div class="loc_signup">
                         <form id="signin" asp-action="#?" asp-antiforgery="true">
                             <div class="input_control">
-                                <input type="text" id="user-name" role="textbox" asp-for="user_name"
+                                <input type="text" id="user-name" role="textbox" asp-for="UserName"
                                     placeholder="Username">
                                 <span class="val_msg"></span>
                             </div>
@@ -74,7 +74,7 @@
                                 <a asp-controller="account" asp-action="forgot-password" role="link">Forgot
                                     password?</a>
                                 <div class="input_control">
-                                    <input type="password" id="password" role="textbox" asp-for=" password"
+                                    <input type="password" id="password" role="textbox" asp-for=" Password"
                                         placeholder="Password">
                                     <span class="val_msg"></span>
                                 </div>

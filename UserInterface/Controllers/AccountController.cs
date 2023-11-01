@@ -15,23 +15,23 @@ namespace UserInterface.Controllers
     public class AccountController : Controller
     {
         // services
-        private UserManager<IdentityUser> _userManager { get; }
-        private SignInManager<IdentityUser> _signinManager { get; }
-        private IMailService _mailSend { get; }
+        private UserManager<IdentityUser> UserManager { get; }
+        private SignInManager<IdentityUser> SigninManager { get; }
+        private IMailService MailSend { get; }
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IDataService _dataService;
 
         [TempData]
-        public string? alertMessage { get; set; }
+        public string? AlertMessage { get; set; }
 
         public AccountController(IDataService dataService, SignInManager<IdentityUser> signinManager,
         UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, IMailService mailSend)
         {
             _dataService = dataService;
-            _signinManager = signinManager;
-            _userManager = userManager;
+            SigninManager = signinManager;
+            UserManager = userManager;
             _roleManager = roleManager;
-            _mailSend = mailSend;
+            MailSend = mailSend;
         }
 
         // sign in landing action
@@ -56,21 +56,21 @@ namespace UserInterface.Controllers
         public async Task<JsonResult> SignIn(SignInViewModel data)
         {
             // check existing user
-            string userName = data.user_name;
-            string password = data.password;
-            var exist = await _userManager.FindByNameAsync(userName);
+            string userName = data.UserName;
+            string password = data.Password;
+            var exist = await UserManager.FindByNameAsync(userName);
             if (exist is null)
             {
                 return Json(new
                 {
                     success = false,
-                    message = "User name or password is incorrect"
+                    message = "User name or password is incorrect."
                 });
 
             }
             else
             {
-                var result = await _signinManager.PasswordSignInAsync(userName, password, false, false);
+                var result = await SigninManager.PasswordSignInAsync(userName, password, false, false);
                 if (result.Succeeded)
                 {
 
@@ -87,7 +87,7 @@ namespace UserInterface.Controllers
                     return Json(new
                     {
                         success = false,
-                        message = "User name or password is incorrect"
+                        message = "User name or password is incorrect."
                     });
                 }
             }
@@ -113,7 +113,7 @@ namespace UserInterface.Controllers
                     // redirect url
                     string redirectUrl = Url.Action("google", "account", new { type = role });
 
-                    properties = _signinManager.ConfigureExternalAuthenticationProperties(oauth, redirectUrl);
+                    properties = SigninManager.ConfigureExternalAuthenticationProperties(oauth, redirectUrl);
                     break;
 
             }
@@ -129,20 +129,19 @@ namespace UserInterface.Controllers
             string role = type;
 
             // get external login infomation
-            var info = await _signinManager.GetExternalLoginInfoAsync();
+            var info = await SigninManager.GetExternalLoginInfoAsync();
             if (info is null)
             {
                 // return error to user
-                alertMessage = "Sign in information not found";
+                AlertMessage = "Sign in information not found.";
                 return LocalRedirect("/");
             }
 
             // sign in user with the provider if user already has a account
             // otherwise create an account and add role
-            var result = await _signinManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, false, false);
+            var result = await SigninManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, false, false);
             if (result.Succeeded)
             {
-                string userName = info.Principal.FindFirst(ClaimTypes.GivenName).Value.ToLower();
                 // return user to task page on success
                 return LocalRedirect("/tasks");
             }
@@ -154,12 +153,12 @@ namespace UserInterface.Controllers
                 if (mail is null)
                 {
                     // no external login info -> cookie expire or provider issue
-                    alertMessage = "We could not find your information";
+                    AlertMessage = "We could not find your information.";
                     return LocalRedirect("/");
                 }
 
                 // create account if user not exist
-                var user = await _userManager.FindByEmailAsync(mail);
+                var user = await UserManager.FindByEmailAsync(mail);
                 if (user is null)
                 {
                     // return user when no role provided -> this happens in sign in mode
@@ -167,7 +166,7 @@ namespace UserInterface.Controllers
 
                     if (role != Roles.member & role != Roles.lead)
                     {
-                        alertMessage = "Account type does not match with correct user type, Please sign up first";
+                        AlertMessage = "Account type does not match with correct user type. Please sign up first.";
                         return LocalRedirect("/");
                     }
 
@@ -177,10 +176,10 @@ namespace UserInterface.Controllers
                         Email = info.Principal.FindFirst(ClaimTypes.Email).Value
                     };
 
-                    var create = await _userManager.CreateAsync(user);
+                    var create = await UserManager.CreateAsync(user);
                     if (!create.Succeeded)
                     {
-                        alertMessage = "Something went wrong, Please try again later";
+                        AlertMessage = "Something went wrong, Please try again later.";
                         return LocalRedirect("/");
                     }
 
@@ -188,7 +187,7 @@ namespace UserInterface.Controllers
                     var userRole = _roleManager.FindByNameAsync(role).Result;
                     if (userRole != null)
                     {
-                        await _userManager.AddToRoleAsync(user, userRole.Name);
+                        await UserManager.AddToRoleAsync(user, userRole.Name);
                     }
                     else
                     {
@@ -198,32 +197,32 @@ namespace UserInterface.Controllers
                         };
 
                         await _roleManager.CreateAsync(newRole);
-                        await _userManager.AddToRoleAsync(user, newRole.Name);
+                        await UserManager.AddToRoleAsync(user, newRole.Name);
                     }
 
                     // add user to extra user detail table
                     var adduser = new UsersDto()
                     {
-                        user_name = user.UserName,
-                        first_name = user.UserName,
-                        user_mail = user.Email,
-                        is_admin = (role == Roles.lead) ? true : false
+                        UserName = user.UserName,
+                        FirstName = user.UserName,
+                        UserMail = user.Email,
+                        IsAdmin = (role == Roles.lead)
                     };
 
                     await _dataService.SaveNewUserAsync(adduser);
                 }
 
                 // add login for new or existing user
-                var login = await _userManager.AddLoginAsync(user, info);
+                var login = await UserManager.AddLoginAsync(user, info);
                 if (login.Succeeded)
                 {
                     // log in user to application
-                    await _signinManager.SignInAsync(user, false);
+                    await SigninManager.SignInAsync(user, false);
                     return LocalRedirect("/tasks");
                 }
                 else
                 {
-                    alertMessage = "Error occurred during the login process";
+                    AlertMessage = "Error occurred during the login process.";
                     return LocalRedirect("/");
                 }
             }
@@ -233,7 +232,7 @@ namespace UserInterface.Controllers
         [HttpGet]
         public async Task<IActionResult> SignOut()
         {
-            await _signinManager.SignOutAsync();
+            await SigninManager.SignOutAsync();
             return LocalRedirect("/");
         }
 
@@ -244,7 +243,7 @@ namespace UserInterface.Controllers
             // send user type
             var viewmodel = new SignUpViewModel()
             {
-                role = type
+                Role = type
             };
 
             return View(viewmodel);
@@ -256,49 +255,49 @@ namespace UserInterface.Controllers
         public async Task<JsonResult> SignUp(SignUpViewModel data)
         {
             // user role not accepted
-            if (data.role != Roles.member & data.role != Roles.lead)
+            if (data.Role != Roles.member & data.Role != Roles.lead)
             {
                 return Json(new
                 {
                     success = false,
-                    message = "The account type is not accepted"
+                    message = "The account type is not accepted."
                 });
             }
 
             // check existing emails
-            string email = data.email;
-            var exist = await _userManager.FindByEmailAsync(email);
+            string email = data.Email;
+            var exist = await UserManager.FindByEmailAsync(email);
             if (exist is not null)
             {
                 return Json(new
                 {
                     success = false,
-                    message = "Email address already exists"
+                    message = "Email address already exists."
                 });
             }
 
             // new user
             var user = new IdentityUser
             {
-                UserName = data.user_name,
-                Email = data.email
+                UserName = data.UserName,
+                Email = data.Email
             };
 
             // user password
-            string password = data.password;
+            string password = data.Password;
 
             // role
-            string role = data.role;
+            string role = data.Role;
 
             // create new user
-            var result = await _userManager.CreateAsync(user: user, password: password);
+            var result = await UserManager.CreateAsync(user: user, password: password);
             if (result.Succeeded)
             {
                 // create role
                 var userRole = _roleManager.FindByNameAsync(role).Result;
                 if (userRole != null)
                 {
-                    await _userManager.AddToRoleAsync(user, userRole.Name);
+                    await UserManager.AddToRoleAsync(user, userRole.Name);
                 }
                 else
                 {
@@ -308,16 +307,16 @@ namespace UserInterface.Controllers
                     };
 
                     await _roleManager.CreateAsync(newRole);
-                    await _userManager.AddToRoleAsync(user, newRole.Name);
+                    await UserManager.AddToRoleAsync(user, newRole.Name);
                 }
 
                 // add user to extra user detail table
                 var adduser = new UsersDto()
                 {
-                    user_name = data.user_name,
-                    first_name = data.first_name,
-                    user_mail = user.Email,
-                    is_admin = (role == Roles.lead) ? true : false
+                    UserName = data.UserName,
+                    FirstName = data.FirstName,
+                    UserMail = user.Email,
+                    IsAdmin = (role == Roles.lead)
                 };
 
                 await _dataService.SaveNewUserAsync(adduser);
@@ -334,7 +333,7 @@ namespace UserInterface.Controllers
                 return Json(new
                 {
                     success = false,
-                    message = "Something went wrong, Please try again later"
+                    message = "Something went wrong, Please try again later."
                 });
             }
         }
@@ -352,37 +351,37 @@ namespace UserInterface.Controllers
         public async Task<JsonResult> ForgotPassword(SendResetLink data)
         {
             // check existing user
-            string mail = data.mail;
-            var user = await _userManager.FindByEmailAsync(mail);
+            string mail = data.Mail;
+            var user = await UserManager.FindByEmailAsync(mail);
             if (user is null)
             {
                 return Json(new
                 {
                     success = false,
-                    message = "Email not found to send reset link"
+                    message = "Email not found to send reset link."
                 });
             }
             else
             {
                 // generate token
-                var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+                var token = await UserManager.GeneratePasswordResetTokenAsync(user);
 
                 // callback url
-                var callback = Url.Action("reset-password", "account", new { token = token, email = user.Email }, Request.Scheme);
+                var callback = Url.Action("reset-password", "account", new { token, email = user.Email }, Request.Scheme);
 
                 // mail subject
-                string subject = "Assigna password reset link";
+                string subject = "Assigna password reset link.";
 
                 // mail body
-                string body = $"Please click the link below to reset your shopper account password. <br> <a href='{callback}'>Click here to reset the password.</a>";
+                string body = $"Please click the link below to reset your assigna account password. <br> <a href='{callback}'>Click here to reset the password.</a>";
 
-                var result = await _mailSend.SendMailAsync(mail, subject, body);
-                if (result.success)
+                var result = await MailSend.SendMailAsync(mail, subject, body);
+                if (result.Success)
                 {
                     return Json(new
                     {
                         success = true,
-                        message = "Recovery email sent. If you don’t see this email in your inbox within 15 minutes, look for it in your spam folder. If you find it there, please mark it as spam"
+                        message = "Recovery email sent. If you don’t see this email in your inbox within 15 minutes, look for it in your spam folder. If you find it there, please mark it as not spam."
                     });
                 }
                 else
@@ -390,7 +389,7 @@ namespace UserInterface.Controllers
                     return Json(new
                     {
                         success = false,
-                        message = "Something went wrong, Please try again later"
+                        message = "Something went wrong, Please try again later."
                     });
                 }
             }
@@ -400,7 +399,7 @@ namespace UserInterface.Controllers
         [HttpGet("reset-password")]
         public IActionResult ResetPassword(string token, string email)
         {
-            return View(new ResetViewModel() { token = token, mail = email });
+            return View(new ResetViewModel() { Token = token, Mail = email });
         }
 
         // reset password to new one
@@ -409,34 +408,34 @@ namespace UserInterface.Controllers
         public async Task<JsonResult> ResetPassword(ResetViewModel data)
         {
             // check existing user
-            string email = data.mail;
-            string token = data.token;
-            string password = data.password;
-            var user = await _userManager.FindByEmailAsync(email);
+            string email = data.Mail;
+            string token = data.Token;
+            string password = data.Password;
+            var user = await UserManager.FindByEmailAsync(email);
             if (user is null)
             {
                 return Json(new
                 {
                     success = false,
-                    message = "Could not find account details"
+                    message = "Could not find account details."
                 });
             }
             else
             {
-                var result = await _userManager.ResetPasswordAsync(user, token, password);
+                var result = await UserManager.ResetPasswordAsync(user, token, password);
                 if (result.Succeeded)
                 {
                     return Json(new
                     {
                         success = true,
-                        message = "Password reset successful. Your password has been reset to the new one. Please click the below link to sign in to your assigna account"
+                        message = "Password reset successful. Your password has been reset to the new one. Please click the below link to sign in to your assigna account."
                     });
                 }
                 else
                 {
                     return Json(new
                     {
-                        message = "Something went wrong, Please try again later",
+                        message = "Something went wrong, Please try again later.",
                         success = false
                     });
                 }

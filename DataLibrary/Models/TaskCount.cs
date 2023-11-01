@@ -3,11 +3,11 @@ namespace DataLibrary.Models
     // all type of task count
     public class TaskCount
     {
-        public int all_task { get; set; }
-        public int pendings { get; set; }
-        public int complete { get; set; }
-        public int high { get; set; }
-        public int medium { get; set; }
-        public int low { get; set; }
+        public int AllTask { get; set; }
+        public int Pendings { get; set; }
+        public int Complete { get; set; }
+        public int High { get; set; }
+        public int Medium { get; set; }
+        public int Low { get; set; }
     }
 }

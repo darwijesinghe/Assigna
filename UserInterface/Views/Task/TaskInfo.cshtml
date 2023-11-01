@@ -2,7 +2,7 @@
 @model TaskViewModel
 @{
     ViewBag.Title = "Task Info";
-    var info = Model._taskinfo.ToList();
+    var info = Model.Taskinfo.ToList();
 
 }
 @functions
@@ -33,7 +33,7 @@
                         <span>Title</span>
                     </td>
                     <td class="view_t_data col_padding">
-                        <p>@task.tsk_title</p>
+                        <p>@task.TskTitle</p>
                     </td>
                 </tr>
                 <tr>
@@ -41,7 +41,7 @@
                         <span>Category</span>
                     </td>
                     <td class="view_t_data col_padding">
-                        <p>@task.cat_name</p>
+                        <p>@task.CatName</p>
                     </td>
                 </tr>
                 <tr>
@@ -49,7 +49,7 @@
                         <span>Deadline</span>
                     </td>
                     <td class="view_t_data col_padding">
-                        <p>@task.deadline.ToString("yyyy-MM-dd")</p>
+                        <p>@task.Deadline.ToString("yyyy-MM-dd")</p>
                     </td>
                 </tr>
                 <tr>
@@ -58,7 +58,7 @@
                     </td>
                     <td class="view_t_data col_padding">
                         @{
-                            string priority = (@task.prio_high) ? "High" : (@task.prio_medium) ? "Medium" : "Low";
+                            string priority = (@task.PrioHigh) ? "High" : (@task.PrioMedium) ? "Medium" : "Low";
                         }
                         <p>@priority priority task</p>
                     </td>
@@ -68,7 +68,7 @@
                         <span>Assigned To</span>
                     </td>
                     <td class="view_t_data col_padding">
-                        <p>@task.first_name</p>
+                        <p>@task.FirstName</p>
                     </td>
                 </tr>
                 <tr>
@@ -76,7 +76,7 @@
                         <span>Task Note</span>
                     </td>
                     <td class="view_t_data col_padding">
-                        <p>@task.tsk_note</p>
+                        <p>@task.TskNote</p>
                     </td>
                 </tr>
                 <tr>
@@ -85,7 +85,7 @@
                     </td>
                     <td class="view_t_data col_padding">
                         @{
-                            string status = (@task.pending) ? "Pending" : "Completed";
+                            string status = (@task.Pending) ? "Pending" : "Completed";
                         }
                         <p id="ts-status">@status</p>
                     </td>
@@ -96,8 +96,8 @@
                     </td>
                     <td class="view_t_data">
                         @{
-                            string userNote = string.IsNullOrEmpty(@task.user_note) ? "User note is not available" :
-                @task.user_note;
+                            string userNote = string.IsNullOrEmpty(@task.UserNote) ? "User note is not available" :
+                @task.UserNote;
                         }
                         <p>@userNote</p>
                     </td>
@@ -107,38 +107,38 @@
                 @if (User.IsInRole(Roles.member))
                 {
                     <!-- for user -->
-                    if (task!.complete)
+                    if (task!.Complete)
                     {
                         <a id="add-note" class="link_button" role="link" asp-action="#?" disabled>Add Note</a>
-                        <button class="button" id="done-task" role="button" value="@task.tsk_id" disabled>Task Done</button>
+                        <button class="button" id="done-task" role="button" value="@task.TskId" disabled>Task Done</button>
                     }
                     else
                     {
                         <a id="add-note" class="link_button" role="link" asp-action="add-note" asp-controller="task"
-                asp-route-taskid="@task.tsk_id">Add
+                asp-route-taskid="@task.TskId">Add
                             Note</a>
-                        <button class="button" id="done-task" role="button" value="@task.tsk_id">Task Done</button>
+                        <button class="button" id="done-task" role="button" value="@task.TskId">Task Done</button>
                     }
 
                 }
                 @if (User.IsInRole(Roles.lead))
                 {
                     <!-- for admin -->
-                    if (task!.complete)
+                    if (task!.Complete)
                     {
                         <a class="link_button" role="link" asp-action="edit-task" asp-controller="task"
-                asp-route-taskid="@task.tsk_id" disabled>Edit
+                asp-route-taskid="@task.TskId" disabled>Edit
                         </a>
                     }
                     else
                     {
                         <a class="link_button" role="link" asp-action="edit-task" asp-controller="task"
-                asp-route-taskid="@task.tsk_id">Edit
+                asp-route-taskid="@task.TskId">Edit
                         </a>
                     }
-                    <button class="outline_button send_remind" id="send-remind" role="button" data-id="@task.tsk_id"
-                data-name="@task.first_name" data-token="@ForgeryToken()">Remind</button>
-                    <button class="button" id="delete-task" role="button" value="@task.tsk_id">Delete</button>
+                    <button class="outline_button send_remind" id="send-remind" role="button" data-id="@task.TskId"
+                data-name="@task.FirstName" data-token="@ForgeryToken()">Remind</button>
+                    <button class="button" id="delete-task" role="button" value="@task.TskId">Delete</button>
                 }
             </div>
         }

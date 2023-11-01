@@ -3,10 +3,10 @@ namespace UserInterface.Models
     public class SignUpViewModel
     {
         // data caputure variables
-        public string first_name { get; set; } = string.Empty;
-        public string user_name { get; set; } = string.Empty;
-        public string password { get; set; } = string.Empty;
-        public string email { get; set; } = string.Empty;
-        public string role { get; set; } = string.Empty;
+        public string FirstName { get; set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }
+        public string Email { get; set; }
+        public string Role { get; set; }
     }
 }

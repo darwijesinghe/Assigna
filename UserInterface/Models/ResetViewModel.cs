@@ -5,11 +5,11 @@ namespace UserInterface.Models
         // data capture variables
         public class SendResetLink
         {
-            public string mail { get; set; } = string.Empty;
+            public string Mail { get; set; }
         }
-        public string password { get; set; } = string.Empty;
-        public string confirm { get; set; } = string.Empty;
-        public string mail { get; set; } = string.Empty;
-        public string token { get; set; } = string.Empty;
+        public string Password { get; set; }
+        public string Confirm { get; set; }
+        public string Mail { get; set; }
+        public string Token { get; set; }
     }
 }

@@ -37,10 +37,10 @@ namespace UserInterface
                 // get database option values
                 var options = serviceprovider.GetService<IOptions<DatabaseOptions>>()!.Value;
 
-                option.UseSqlServer(options.connectionString, action =>
+                option.UseSqlServer(options.ConnectionString, action =>
                 {
                     action.MigrationsAssembly("DataLibrary");
-                    action.CommandTimeout(options.commandTimeout);
+                    action.CommandTimeout(options.CommandTimeout);
                 });
             });
 
@@ -50,10 +50,10 @@ namespace UserInterface
                 // get database option values
                 var options = serviceprovider.GetService<IOptions<DatabaseOptions>>()!.Value;
 
-                option.UseSqlServer(options.connectionString, action =>
+                option.UseSqlServer(options.ConnectionString, action =>
                 {
                     action.MigrationsAssembly("DataLibrary");
-                    action.CommandTimeout(options.commandTimeout);
+                    action.CommandTimeout(options.CommandTimeout);
                 });
             });
 
@@ -121,6 +121,7 @@ namespace UserInterface
                 app.UseHsts();
             }
 
+            app.UseStatusCodePages();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

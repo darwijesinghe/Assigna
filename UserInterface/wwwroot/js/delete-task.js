@@ -54,6 +54,7 @@ delButton &&
     }
   });
 
+remButton &&
 remButton.addEventListener("click", (e) => {
   try {
     let id = remButton.getAttribute("data-id");

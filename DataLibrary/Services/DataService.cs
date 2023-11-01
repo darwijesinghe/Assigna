@@ -13,34 +13,34 @@ namespace DataLibrary.Services
     public class DataService : IDataService
     {
         // data context
-        public DataContext _context { get; }
+        public DataContext Context { get; }
 
         public DataService(DataContext context)
         {
-            _context = context;
+            Context = context;
         }
 
         // all tasks
         public List<TaskDto> AllTasks(string userName, bool isAdmin)
         {
-            var taks = (from us in _context.users
-                        join tk in _context.task on us.user_id equals tk.users.user_id
+            var taks = (from us in Context.users
+                        join tk in Context.task on us.user_id equals tk.users.user_id
                         select new TaskDto
                         {
-                            tsk_id = tk.tsk_id,
-                            tsk_title = tk.tsk_title,
-                            deadline = tk.deadline,
-                            tsk_note = tk.tsk_note,
-                            pending = tk.pending,
-                            complete = tk.complete,
-                            prio_high = tk.prio_high,
-                            prio_medium = tk.prio_medium,
-                            prio_low = tk.prio_low,
-                            user_note = tk.user_note,
-                            cat_id = tk.cat_id,
-                            user_id = tk.user_id,
-                            user_name = us.user_name,
-                            first_name = us.first_name
+                            TskId = tk.tsk_id,
+                            TskTitle = tk.tsk_title,
+                            Deadline = tk.deadline,
+                            TskNote = tk.tsk_note,
+                            Pending = tk.pending,
+                            Complete = tk.complete,
+                            PrioHigh = tk.prio_high,
+                            PrioMedium = tk.prio_medium,
+                            PrioLow = tk.prio_low,
+                            UserNote = tk.user_note,
+                            CatId = tk.cat_id,
+                            UserId = tk.user_id,
+                            UserName = us.user_name,
+                            FirstName = us.first_name
 
                         }).ToList();
 
@@ -49,199 +49,199 @@ namespace DataLibrary.Services
 
             if (isAdmin)
             {
-                return taks.OrderBy(x => x.tsk_id).ToList();
+                return taks.OrderBy(x => x.TskId).ToList();
             }
 
-            return taks.Where(x => x.user_name == userName)
-            .OrderBy(x => x.tsk_id)
+            return taks.Where(x => x.UserName == userName)
+            .OrderBy(x => x.TskId)
             .ToList();
         }
 
         // pending tasks
         public List<TaskDto> Pendings(string userName, bool isAdmin)
         {
-            var taks = (from us in _context.users
-                        join tk in _context.task on us.user_id equals tk.users.user_id
+            var taks = (from us in Context.users
+                        join tk in Context.task on us.user_id equals tk.users.user_id
                         select new TaskDto
                         {
-                            tsk_id = tk.tsk_id,
-                            tsk_title = tk.tsk_title,
-                            deadline = tk.deadline,
-                            tsk_note = tk.tsk_note,
-                            pending = tk.pending,
-                            complete = tk.complete,
-                            prio_high = tk.prio_high,
-                            prio_medium = tk.prio_medium,
-                            prio_low = tk.prio_low,
-                            user_note = tk.user_note,
-                            cat_id = tk.cat_id,
-                            user_id = tk.user_id,
-                            user_name = us.user_name,
-                            first_name = us.first_name
+                            TskId = tk.tsk_id,
+                            TskTitle = tk.tsk_title,
+                            Deadline = tk.deadline,
+                            TskNote = tk.tsk_note,
+                            Pending = tk.pending,
+                            Complete = tk.complete,
+                            PrioHigh = tk.prio_high,
+                            PrioMedium = tk.prio_medium,
+                            PrioLow = tk.prio_low,
+                            UserNote = tk.user_note,
+                            CatId = tk.cat_id,
+                            UserId = tk.user_id,
+                            UserName = us.user_name,
+                            FirstName = us.first_name
 
                         });
 
             if (isAdmin)
             {
-                return taks.Where(x => x.pending == true)
-                .OrderBy(x => x.tsk_id)
+                return taks.Where(x => x.Pending == true)
+                .OrderBy(x => x.TskId)
                 .ToList();
             }
 
-            return taks.Where(x => x.pending == true & x.user_name == userName)
-            .OrderBy(x => x.tsk_id).ToList();
+            return taks.Where(x => x.Pending == true & x.UserName == userName)
+            .OrderBy(x => x.TskId).ToList();
         }
 
         // completed tasks
         public List<TaskDto> Completed(string userName, bool isAdmin)
         {
-            var taks = (from us in _context.users
-                        join tk in _context.task on us.user_id equals tk.users.user_id
+            var taks = (from us in Context.users
+                        join tk in Context.task on us.user_id equals tk.users.user_id
                         select new TaskDto
                         {
-                            tsk_id = tk.tsk_id,
-                            tsk_title = tk.tsk_title,
-                            deadline = tk.deadline,
-                            tsk_note = tk.tsk_note,
-                            pending = tk.pending,
-                            complete = tk.complete,
-                            prio_high = tk.prio_high,
-                            prio_medium = tk.prio_medium,
-                            prio_low = tk.prio_low,
-                            user_note = tk.user_note,
-                            cat_id = tk.cat_id,
-                            user_id = tk.user_id,
-                            user_name = us.user_name,
-                            first_name = us.first_name
+                            TskId = tk.tsk_id,
+                            TskTitle = tk.tsk_title,
+                            Deadline = tk.deadline,
+                            TskNote = tk.tsk_note,
+                            Pending = tk.pending,
+                            Complete = tk.complete,
+                            PrioHigh = tk.prio_high,
+                            PrioMedium = tk.prio_medium,
+                            PrioLow = tk.prio_low,
+                            UserNote = tk.user_note,
+                            CatId = tk.cat_id,
+                            UserId = tk.user_id,
+                            UserName = us.user_name,
+                            FirstName = us.first_name
 
                         });
 
             if (isAdmin)
             {
-                return taks.Where(x => x.complete == true)
-                .OrderBy(x => x.tsk_id)
+                return taks.Where(x => x.Complete == true)
+                .OrderBy(x => x.TskId)
                 .ToList();
             }
 
-            return taks.Where(x => x.complete == true & x.user_name == userName)
-            .OrderBy(x => x.tsk_id).ToList();
+            return taks.Where(x => x.Complete == true & x.UserName == userName)
+            .OrderBy(x => x.TskId).ToList();
         }
 
         // high priority tasks
         public List<TaskDto> HighPriority(string userName, bool isAdmin)
         {
-            var taks = (from us in _context.users
-                        join tk in _context.task on us.user_id equals tk.users.user_id
+            var taks = (from us in Context.users
+                        join tk in Context.task on us.user_id equals tk.users.user_id
                         select new TaskDto
                         {
-                            tsk_id = tk.tsk_id,
-                            tsk_title = tk.tsk_title,
-                            deadline = tk.deadline,
-                            tsk_note = tk.tsk_note,
-                            pending = tk.pending,
-                            complete = tk.complete,
-                            prio_high = tk.prio_high,
-                            prio_medium = tk.prio_medium,
-                            prio_low = tk.prio_low,
-                            user_note = tk.user_note,
-                            cat_id = tk.cat_id,
-                            user_id = tk.user_id,
-                            user_name = us.user_name,
-                            first_name = us.first_name
+                            TskId = tk.tsk_id,
+                            TskTitle = tk.tsk_title,
+                            Deadline = tk.deadline,
+                            TskNote = tk.tsk_note,
+                            Pending = tk.pending,
+                            Complete = tk.complete,
+                            PrioHigh = tk.prio_high,
+                            PrioMedium = tk.prio_medium,
+                            PrioLow = tk.prio_low,
+                            UserNote = tk.user_note,
+                            CatId = tk.cat_id,
+                            UserId = tk.user_id,
+                            UserName = us.user_name,
+                            FirstName = us.first_name
 
                         });
 
             if (isAdmin)
             {
-                return taks.Where(x => x.prio_high == true)
-                .OrderBy(x => x.tsk_id)
+                return taks.Where(x => x.PrioHigh == true)
+                .OrderBy(x => x.TskId)
                 .ToList();
             }
 
-            return taks.Where(x => x.prio_high == true & x.user_name == userName)
-            .OrderBy(x => x.tsk_id).ToList();
+            return taks.Where(x => x.PrioHigh == true & x.UserName == userName)
+            .OrderBy(x => x.TskId).ToList();
         }
 
         // medium priority tasks
         public List<TaskDto> MediumPriority(string userName, bool isAdmin)
         {
-            var taks = (from us in _context.users
-                        join tk in _context.task on us.user_id equals tk.users.user_id
+            var taks = (from us in Context.users
+                        join tk in Context.task on us.user_id equals tk.users.user_id
                         select new TaskDto
                         {
-                            tsk_id = tk.tsk_id,
-                            tsk_title = tk.tsk_title,
-                            deadline = tk.deadline,
-                            tsk_note = tk.tsk_note,
-                            pending = tk.pending,
-                            complete = tk.complete,
-                            prio_high = tk.prio_high,
-                            prio_medium = tk.prio_medium,
-                            prio_low = tk.prio_low,
-                            user_note = tk.user_note,
-                            cat_id = tk.cat_id,
-                            user_id = tk.user_id,
-                            user_name = us.user_name,
-                            first_name = us.first_name
+                            TskId = tk.tsk_id,
+                            TskTitle = tk.tsk_title,
+                            Deadline = tk.deadline,
+                            TskNote = tk.tsk_note,
+                            Pending = tk.pending,
+                            Complete = tk.complete,
+                            PrioHigh = tk.prio_high,
+                            PrioMedium = tk.prio_medium,
+                            PrioLow = tk.prio_low,
+                            UserNote = tk.user_note,
+                            CatId = tk.cat_id,
+                            UserId = tk.user_id,
+                            UserName = us.user_name,
+                            FirstName = us.first_name
 
                         });
 
             if (isAdmin)
             {
-                return taks.Where(x => x.prio_medium == true)
-                .OrderBy(x => x.tsk_id)
+                return taks.Where(x => x.PrioMedium == true)
+                .OrderBy(x => x.TskId)
                 .ToList();
             }
 
-            return taks.Where(x => x.prio_medium == true & x.user_name == userName)
-            .OrderBy(x => x.tsk_id).ToList();
+            return taks.Where(x => x.PrioMedium == true & x.UserName == userName)
+            .OrderBy(x => x.TskId).ToList();
         }
 
         // low priority tasks
         public List<TaskDto> LowPriority(string userName, bool isAdmin)
         {
-            var taks = (from us in _context.users
-                        join tk in _context.task on us.user_id equals tk.users.user_id
+            var taks = (from us in Context.users
+                        join tk in Context.task on us.user_id equals tk.users.user_id
                         select new TaskDto
                         {
-                            tsk_id = tk.tsk_id,
-                            tsk_title = tk.tsk_title,
-                            deadline = tk.deadline,
-                            tsk_note = tk.tsk_note,
-                            pending = tk.pending,
-                            complete = tk.complete,
-                            prio_high = tk.prio_high,
-                            prio_medium = tk.prio_medium,
-                            prio_low = tk.prio_low,
-                            user_note = tk.user_note,
-                            cat_id = tk.cat_id,
-                            user_id = tk.user_id,
-                            user_name = us.user_name,
-                            first_name = us.first_name
+                            TskId = tk.tsk_id,
+                            TskTitle = tk.tsk_title,
+                            Deadline = tk.deadline,
+                            TskNote = tk.tsk_note,
+                            Pending = tk.pending,
+                            Complete = tk.complete,
+                            PrioHigh = tk.prio_high,
+                            PrioMedium = tk.prio_medium,
+                            PrioLow = tk.prio_low,
+                            UserNote = tk.user_note,
+                            CatId = tk.cat_id,
+                            UserId = tk.user_id,
+                            UserName = us.user_name,
+                            FirstName = us.first_name
 
                         });
 
             if (isAdmin)
             {
-                return taks.Where(x => x.prio_low == true)
-                .OrderBy(x => x.tsk_id)
+                return taks.Where(x => x.PrioLow == true)
+                .OrderBy(x => x.TskId)
                 .ToList();
             }
 
-            return taks.Where(x => x.prio_low == true & x.user_name == userName)
-            .OrderBy(x => x.tsk_id).ToList();
+            return taks.Where(x => x.PrioLow == true & x.UserName == userName)
+            .OrderBy(x => x.TskId).ToList();
         }
 
         // task categories
         public List<CategoryDto> Categories()
         {
-            var categories = _context.category
+            var categories = Context.category
             .Select(x => new CategoryDto
             {
-                cat_id = x.cat_id,
-                cat_name = x.cat_name,
+                CatId = x.cat_id,
+                CatName = x.cat_name,
 
-            }).OrderBy(x => x.cat_id)
+            }).OrderBy(x => x.CatId)
             .ToList();
 
             return categories;
@@ -250,17 +250,17 @@ namespace DataLibrary.Services
         // app users
         public List<UsersDto> Users()
         {
-            var users = _context.users
+            var users = Context.users
             .Select(x => new UsersDto
             {
-                user_id = x.user_id,
-                user_name = x.user_name,
-                first_name = x.first_name,
-                user_mail = x.user_mail,
-                is_admin = x.is_admin
+                UserId = x.user_id,
+                UserName = x.user_name,
+                FirstName = x.first_name,
+                UserMail = x.user_mail,
+                IsAdmin = x.is_admin
             })
-            .Where(x => x.is_admin == false)
-            .OrderBy(x => x.user_id)
+            .Where(x => x.IsAdmin == false)
+            .OrderBy(x => x.UserId)
             .ToList();
 
             return users;
@@ -271,29 +271,29 @@ namespace DataLibrary.Services
         {
             var user = new Users()
             {
-                user_name = data.user_name ?? string.Empty,
-                first_name = data.first_name ?? string.Empty,
-                user_mail = data.user_mail ?? string.Empty,
-                is_admin = data.is_admin
+                user_name = data.UserName ?? string.Empty,
+                first_name = data.FirstName ?? string.Empty,
+                user_mail = data.UserMail ?? string.Empty,
+                is_admin = data.IsAdmin
             };
 
-            _context.users.Add(user);
+            Context.users.Add(user);
 
             try
             {
-                await _context.SaveChangesAsync();
+                await Context.SaveChangesAsync();
                 return new Result
                 {
-                    message = "Ok",
-                    success = true
+                    Message = "Ok",
+                    Success = true
                 };
             }
             catch (Exception ex)
             {
                 return new Result
                 {
-                    message = ex.Message,
-                    success = false
+                    Message = ex.Message,
+                    Success = false
                 };
             }
         }
@@ -303,34 +303,34 @@ namespace DataLibrary.Services
         {
             var task = new Task()
             {
-                tsk_title = data.tsk_title ?? string.Empty,
-                deadline = data.deadline,
-                tsk_note = data.tsk_note ?? string.Empty,
-                prio_high = data.prio_high,
-                prio_medium = data.prio_medium,
-                prio_low = data.prio_low,
-                cat_id = data.cat_id,
-                user_id = data.user_id,
-                pending = data.pending
+                tsk_title = data.TskTitle ?? string.Empty,
+                deadline = data.Deadline,
+                tsk_note = data.TskNote ?? string.Empty,
+                prio_high = data.PrioHigh,
+                prio_medium = data.PrioMedium,
+                prio_low = data.PrioLow,
+                cat_id = data.CatId,
+                user_id = data.UserId,
+                pending = data.Pending
             };
 
-            _context.task.Add(task);
+            Context.task.Add(task);
 
             try
             {
-                await _context.SaveChangesAsync();
+                await Context.SaveChangesAsync();
                 return new Result
                 {
-                    message = "Ok",
-                    success = true
+                    Message = "Ok",
+                    Success = true
                 };
             }
             catch (Exception ex)
             {
                 return new Result
                 {
-                    message = ex.Message,
-                    success = false
+                    Message = ex.Message,
+                    Success = false
                 };
             }
         }
@@ -338,66 +338,66 @@ namespace DataLibrary.Services
         // task info
         public List<TaskDto> TaskInfo(int taskId)
         {
-            var taks = (from us in _context.users
-                        join tk in _context.task on us.user_id equals tk.users.user_id
-                        join ct in _context.category on tk.category.cat_id equals ct.cat_id
+            var taks = (from us in Context.users
+                        join tk in Context.task on us.user_id equals tk.users.user_id
+                        join ct in Context.category on tk.category.cat_id equals ct.cat_id
                         select new TaskDto
                         {
-                            tsk_id = tk.tsk_id,
-                            tsk_title = tk.tsk_title,
-                            deadline = tk.deadline,
-                            tsk_note = tk.tsk_note,
-                            pending = tk.pending,
-                            complete = tk.complete,
-                            prio_high = tk.prio_high,
-                            prio_medium = tk.prio_medium,
-                            prio_low = tk.prio_low,
-                            user_note = tk.user_note,
-                            cat_id = tk.cat_id,
-                            user_id = tk.user_id,
-                            first_name = us.first_name,
-                            user_mail = us.user_mail,
-                            cat_name = ct.cat_name
+                            TskId = tk.tsk_id,
+                            TskTitle = tk.tsk_title,
+                            Deadline = tk.deadline,
+                            TskNote = tk.tsk_note,
+                            Pending = tk.pending,
+                            Complete = tk.complete,
+                            PrioHigh = tk.prio_high,
+                            PrioMedium = tk.prio_medium,
+                            PrioLow = tk.prio_low,
+                            UserNote = tk.user_note,
+                            CatId = tk.cat_id,
+                            UserId = tk.user_id,
+                            FirstName = us.first_name,
+                            UserMail = us.user_mail,
+                            CatName = ct.cat_name
 
                         });
 
             return taks
-            .Where(x => x.tsk_id == taskId)
-            .OrderBy(x => x.tsk_id).ToList();
+            .Where(x => x.TskId == taskId)
+            .OrderBy(x => x.TskId).ToList();
         }
 
         // edit task
         public async Task<Result> EditTaskAsync(TaskDto data)
         {
-            var task = _context.task.FirstOrDefault(x => x.tsk_id == data.tsk_id);
+            var task = Context.task.FirstOrDefault(x => x.tsk_id == data.TskId);
 
             if (task is not null)
             {
-                task.tsk_title = data.tsk_title ?? string.Empty;
-                task.cat_id = data.cat_id;
-                task.deadline = data.deadline;
-                task.prio_high = data.prio_high;
-                task.prio_medium = data.prio_medium;
-                task.prio_low = data.prio_low;
-                task.user_id = data.user_id;
-                task.tsk_note = data.tsk_note ?? string.Empty;
+                task.tsk_title = data.TskTitle ?? string.Empty;
+                task.cat_id = data.CatId;
+                task.deadline = data.Deadline;
+                task.prio_high = data.PrioHigh;
+                task.prio_medium = data.PrioMedium;
+                task.prio_low = data.PrioLow;
+                task.user_id = data.UserId;
+                task.tsk_note = data.TskNote ?? string.Empty;
             }
 
             try
             {
-                await _context.SaveChangesAsync();
+                await Context.SaveChangesAsync();
                 return new Result
                 {
-                    message = "Ok",
-                    success = true
+                    Message = "Ok",
+                    Success = true
                 };
             }
             catch (Exception ex)
             {
                 return new Result
                 {
-                    message = ex.Message,
-                    success = false
+                    Message = ex.Message,
+                    Success = false
                 };
             }
         }
@@ -405,25 +405,25 @@ namespace DataLibrary.Services
         // delete task
         public async Task<Result> DeleteTaskAsync(int taskId)
         {
-            var task = _context.task.FirstOrDefault(x => x.tsk_id == taskId);
-            _context.task.Remove(task);
+            var task = Context.task.FirstOrDefault(x => x.tsk_id == taskId);
+            Context.task.Remove(task);
 
             try
             {
-                await _context.SaveChangesAsync();
+                await Context.SaveChangesAsync();
                 return new Result
                 {
-                    message = "Ok",
-                    success = true,
-                    id = taskId
+                    Message = "Ok",
+                    Success = true,
+                    Id = taskId
                 };
             }
             catch (Exception ex)
             {
                 return new Result
                 {
-                    message = ex.Message,
-                    success = false
+                    Message = ex.Message,
+                    Success = false
                 };
             }
         }
@@ -431,27 +431,27 @@ namespace DataLibrary.Services
         // add task note
         public async Task<Result> AddTaskNoteAsync(TaskDto data)
         {
-            var task = _context.task.FirstOrDefault(x => x.tsk_id == data.tsk_id);
+            var task = Context.task.FirstOrDefault(x => x.tsk_id == data.TskId);
             if (task is not null)
             {
-                task.user_note = data.user_note ?? string.Empty;
+                task.user_note = data.UserNote ?? string.Empty;
             }
 
             try
             {
-                await _context.SaveChangesAsync();
+                await Context.SaveChangesAsync();
                 return new Result
                 {
-                    message = "Ok",
-                    success = true
+                    Message = "Ok",
+                    Success = true
                 };
             }
             catch (Exception ex)
             {
                 return new Result
                 {
-                    message = ex.Message,
-                    success = false
+                    Message = ex.Message,
+                    Success = false
                 };
             }
         }
@@ -459,7 +459,7 @@ namespace DataLibrary.Services
         // mark as task done
         public async Task<Result> MarkasDone(int taskId)
         {
-            var task = _context.task.FirstOrDefault(x => x.tsk_id == taskId);
+            var task = Context.task.FirstOrDefault(x => x.tsk_id == taskId);
             if (task is not null)
             {
                 task.pending = false;
@@ -468,19 +468,19 @@ namespace DataLibrary.Services
 
             try
             {
-                await _context.SaveChangesAsync();
+                await Context.SaveChangesAsync();
                 return new Result
                 {
-                    message = "Ok",
-                    success = true
+                    Message = "Ok",
+                    Success = true
                 };
             }
             catch (Exception ex)
             {
                 return new Result
                 {
-                    message = ex.Message,
-                    success = false
+                    Message = ex.Message,
+                    Success = false
                 };
             }
         }
@@ -492,43 +492,43 @@ namespace DataLibrary.Services
 
             if (isAdmin)
             {
-                var count = _context.task.ToList();
+                var count = Context.task.ToList();
                 var task = new TaskCount
                 {
-                    all_task = count.Count(),
-                    pendings = count.Where(x => x.pending == true).Count(),
-                    complete = count.Where(x => x.complete == true).Count(),
-                    high = count.Where(x => x.prio_high == true).Count(),
-                    medium = count.Where(x => x.prio_medium == true).Count(),
-                    low = count.Where(x => x.prio_low == true).Count(),
+                    AllTask = count.Count(),
+                    Pendings = count.Where(x => x.pending == true).Count(),
+                    Complete = count.Where(x => x.complete == true).Count(),
+                    High = count.Where(x => x.prio_high == true).Count(),
+                    Medium = count.Where(x => x.prio_medium == true).Count(),
+                    Low = count.Where(x => x.prio_low == true).Count(),
                 };
                 _task.Add(task);
                 return _task.ToList();
             }
             else
             {
-                var count = (from us in _context.users
-                             join tk in _context.task on us.user_id equals tk.users.user_id
+                var count = (from us in Context.users
+                             join tk in Context.task on us.user_id equals tk.users.user_id
                              select new TaskDto
                              {
-                                 tsk_id = tk.tsk_id,
-                                 pending = tk.pending,
-                                 complete = tk.complete,
-                                 prio_high = tk.prio_high,
-                                 prio_medium = tk.prio_medium,
-                                 prio_low = tk.prio_low,
-                                 user_name = us.user_name
+                                 TskId = tk.tsk_id,
+                                 Pending = tk.pending,
+                                 Complete = tk.complete,
+                                 PrioHigh = tk.prio_high,
+                                 PrioMedium = tk.prio_medium,
+                                 PrioLow = tk.prio_low,
+                                 UserName = us.user_name
 
-                             }).Where(x => x.user_name == userName).ToList();
+                             }).Where(x => x.UserName == userName).ToList();
 
                 var task = new TaskCount
                 {
-                    all_task = count.Count(),
-                    pendings = count.Where(x => x.pending == true).Count(),
-                    complete = count.Where(x => x.complete == true).Count(),
-                    high = count.Where(x => x.prio_high == true).Count(),
-                    medium = count.Where(x => x.prio_medium == true).Count(),
-                    low = count.Where(x => x.prio_low == true).Count(),
+                    AllTask = count.Count(),
+                    Pendings = count.Where(x => x.Pending == true).Count(),
+                    Complete = count.Where(x => x.Complete == true).Count(),
+                    High = count.Where(x => x.PrioHigh == true).Count(),
+                    Medium = count.Where(x => x.PrioMedium == true).Count(),
+                    Low = count.Where(x => x.PrioLow == true).Count(),
                 };
                 _task.Add(task);
                 return _task.ToList();

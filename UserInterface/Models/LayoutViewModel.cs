@@ -6,8 +6,8 @@ namespace UserInterface.Models
     public class LayoutViewModel
     {
         // data capture variables
-        public string? user_name { get; set; }
-        public bool role { get; set; }
-        public List<TaskCount>? _taskcount { get; set; }
+        public string? UserName { get; set; }
+        public bool Role { get; set; }
+        public List<TaskCount>? TaskCount { get; set; }
     }
 }

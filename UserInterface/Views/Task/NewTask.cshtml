@@ -1,8 +1,8 @@
 @model TaskViewModel.NewTaskViewModel
 @{
     ViewBag.Title = "New Tasks";
-    var category = Model._category.ToList();
-    var users = Model._users.ToList();
+    var category = Model.Category.ToList();
+    var users = Model.Users.ToList();
 }
 
 <!-- add a task -->
@@ -11,16 +11,16 @@
     <div class="task_form">
         <form id="task" asp-action="#?" asp-antiforgery="true" novalidate>
             <div class="input_control">
-                <input type="text" id="tsk-title" role="textbox" asp-for="tsk_title" placeholder="Task Title">
+                <input type="text" id="tsk-title" role="textbox" asp-for="TskTitle" placeholder="Task Title">
                 <span class="val_msg"></span>
             </div>
             <div class="input_control">
                 <div class="select" id="tsk-cate-parent">
-                    <select id="tsk-category" required title="&nbsp;" role="combobox" asp-for="tsk_category">
+                    <select id="tsk-category" required title="&nbsp;" role="combobox" asp-for="TskCategory">
                         <option value="@string.Empty" selected>Task Category</option>
                         @foreach (var item in category)
                         {
-                            <option value="@item.cat_id">@item.cat_name</option>
+                            <option value="@item.CatId">@item.CatName</option>
                         }
                     </select>
                     <div class="select-arrow"></div>
@@ -30,17 +30,17 @@
             <div class="input_control">
                 <div class="date" id="tsk-date-parent">
                     <small class="place_holder">Due Date</small>
-                    <input type="date" id="tsk-date" required title="&nbsp;" max="9999-12-31" asp-for="deadline">
+                    <input type="date" id="tsk-date" required title="&nbsp;" max="9999-12-31" asp-for="Deadline">
                 </div>
                 <span class="val_msg"></span>
             </div>
             <div class="input_control">
                 <div class="select" id="tsk-assign-parent">
-                    <select id="tsk-assign" required title="&nbsp;" role="combobox" asp-for="assign_to">
+                    <select id="tsk-assign" required title="&nbsp;" role="combobox" asp-for="AssignTo">
                         <option value="@string.Empty" selected>Assign To</option>
                         @foreach (var item in users)
                         {
-                            <option value="@item.user_id">@item.first_name</option>
+                            <option value="@item.UserId">@item.FirstName</option>
                         }
                     </select>
                     <div class="select-arrow"></div>
@@ -50,25 +50,25 @@
             <div class="input_control pri_level">
                 <div>
                     <label class="radio">
-                        <input type="radio" role="radio" asp-for="priority" value="High" checked>
+                        <input type="radio" role="radio" asp-for="Priority" value="High" checked>
                         High Priority
                     </label>
                 </div>
                 <div>
                     <label class="radio">
-                        <input type="radio" role="radio" asp-for="priority" value="Medium">
+                        <input type="radio" role="radio" asp-for="Priority" value="Medium">
                         Medium Priority
                     </label>
                 </div>
                 <div>
                     <label class="radio">
-                        <input type="radio" role="radio" asp-for="priority" value="Low">
+                        <input type="radio" role="radio" asp-for="Priority" value="Low">
                         Low Priority
                     </label>
                 </div>
             </div>
             <div class="input_control task_note">
-                <textarea id="tsk-note" rows="5" role="textbox" asp-for="tsk_note" placeholder="Task Note"></textarea>
+                <textarea id="tsk-note" rows="5" role="textbox" asp-for="TskNote" placeholder="Task Note"></textarea>
                 <span class="val_msg"></span>
             </div>
             <div class="save-button">

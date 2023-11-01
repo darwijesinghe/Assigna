@@ -1,7 +1,7 @@
 @model TaskViewModel.AddNoteViewModel
 @{
     ViewBag.Title = "Assignee Note";
-    var info = Model._taskinfo.ToList()[0];
+    var info = Model.Taskinfo.ToList()[0];
 }
 
 <!-- add user note -->
@@ -14,7 +14,7 @@
                     <span>Title</span>
                 </td>
                 <td class="view_t_data col_padding">
-                    <p>@info.tsk_title</p>
+                    <p>@info.TskTitle</p>
                 </td>
             </tr>
             <tr>
@@ -22,7 +22,7 @@
                     <span>Deadline</span>
                 </td>
                 <td class="view_t_data col_padding">
-                    <p>@info.deadline.ToString("yyyy-MM-dd")</p>
+                    <p>@info.Deadline.ToString("yyyy-MM-dd")</p>
                 </td>
             </tr>
             <tr>
@@ -31,8 +31,8 @@
                 </td>
                 <td class="view_t_data">
                     @{
-                        string userNote = string.IsNullOrEmpty(@info.user_note) ? "User note is not available" :
-            @info.user_note;
+                        string userNote = string.IsNullOrEmpty(@info.UserNote) ? "User note is not available" :
+            @info.UserNote;
                     }
                     <p id="new-note">@userNote</p>
                 </td>
@@ -40,8 +40,8 @@
         </table>
         <form id="user-note" asp-antiforgery="true">
             <div class="input_control">
-                <input type="hidden" asp-for="tsk_id" value="@info.tsk_id">
-                <textarea id="as-note" role="textbox" rows="5" asp-for="user_note" placeholder="Write Note"></textarea>
+                <input type="hidden" asp-for="TskId" value="@info.TskId">
+                <textarea id="as-note" role="textbox" rows="5" asp-for="UserNote" placeholder="Write Note"></textarea>
                 <span class="val_msg"></span>
             </div>
             <div class="save-button">

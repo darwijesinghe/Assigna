@@ -9,6 +9,7 @@ namespace DataLibrary.Models
     // data table
     public class Category
     {
+#pragma warning disable IDE1006 // Naming Styles
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int cat_id { get; set; }
@@ -19,12 +20,13 @@ namespace DataLibrary.Models
         // relationships
         [JsonIgnore]
         public List<Task>? task { get; set; }
+#pragma warning restore IDE1006 // Naming Styles
     }
 
     // data transferring model
     public class CategoryDto
     {
-        public int cat_id { get; set; }
-        public string? cat_name { get; set; }
+        public int CatId { get; set; }
+        public string? CatName { get; set; }
     }
 }

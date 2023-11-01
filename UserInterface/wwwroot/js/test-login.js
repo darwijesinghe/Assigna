@@ -16,8 +16,8 @@ testLead.addEventListener("click", (e) => {
     const token = testLead.getAttribute("data-token");
 
     const formData = new FormData();
-    formData.append("user_name", userName);
-    formData.append("password", password);
+    formData.append("UserName", userName);
+    formData.append("Password", password);
 
     fetch("/account/signin", {
       method: "POST",
@@ -59,8 +59,8 @@ testMember.addEventListener("click", (e) => {
     const token = testMember.getAttribute("data-token");
 
     const formData = new FormData();
-    formData.append("user_name", userName);
-    formData.append("password", password);
+    formData.append("UserName", userName);
+    formData.append("Password", password);
 
     fetch("/account/signin", {
       method: "POST",

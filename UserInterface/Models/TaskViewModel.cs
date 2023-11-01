@@ -6,43 +6,43 @@ namespace UserInterface.Models
     public class TaskViewModel
     {
         // data capture list
-        public List<TaskDto>? _tasks { get; set; }
-        public List<TaskDto>? _pending { get; set; }
-        public List<TaskDto>? _complete { get; set; }
-        public List<TaskDto>? _hpriority { get; set; }
-        public List<TaskDto>? _mpriority { get; set; }
-        public List<TaskDto>? _lpriority { get; set; }
-        public List<TaskDto>? _taskinfo { get; set; }
+        public List<TaskDto>? Tasks { get; set; }
+        public List<TaskDto>? Pending { get; set; }
+        public List<TaskDto>? Complete { get; set; }
+        public List<TaskDto>? Hpriority { get; set; }
+        public List<TaskDto>? Mpriority { get; set; }
+        public List<TaskDto>? Lpriority { get; set; }
+        public List<TaskDto>? Taskinfo { get; set; }
 
         // add new task model
         public class NewTaskViewModel
         {
-            public int tsk_id { get; set; }
-            public string tsk_title { get; set; } = string.Empty;
-            public int tsk_category { get; set; }
-            public string deadline { get; set; } = string.Empty;
-            public string priority { get; set; } = string.Empty;
-            public int assign_to { get; set; }
-            public string tsk_note { get; set; } = string.Empty;
+            public int TskId { get; set; }
+            public string TskTitle { get; set; }
+            public int TskCategory { get; set; }
+            public string Deadline { get; set; }
+            public string Priority { get; set; }
+            public int AssignTo { get; set; }
+            public string TskNote { get; set; }
 
-            public List<CategoryDto>? _category { get; set; }
-            public List<UsersDto>? _users { get; set; }
+            public List<CategoryDto>? Category { get; set; }
+            public List<UsersDto>? Users { get; set; }
 
         }
 
         // add note to task model
         public class AddNoteViewModel
         {
-            public int tsk_id { get; set; }
-            public string? user_note { get; set; }
-            public List<TaskDto>? _taskinfo { get; set; }
+            public int TskId { get; set; }
+            public string? UserNote { get; set; }
+            public List<TaskDto>? Taskinfo { get; set; }
         }
 
         // send task remind model
         public class RemindViewModel
         {
-            public int task_id { get; set; }
-            public string? message { get; set; }
+            public int TaskId { get; set; }
+            public string? Message { get; set; }
         }
     }
 }

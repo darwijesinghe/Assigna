@@ -12,17 +12,17 @@ namespace UserInterface.ViewComponents
     {
         // services
         private readonly IDataService _dataService;
-        private UserManager<IdentityUser> _userManager { get; }
+        private UserManager<IdentityUser> UserManager { get; }
         public NavigateViewComponent(IDataService dataService, UserManager<IdentityUser> userManager)
         {
             _dataService = dataService;
-            _userManager = userManager;
+            UserManager = userManager;
         }
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
             // get sign in user name
-            var user = await _userManager.GetUserAsync((ClaimsPrincipal)User);
+            var user = await UserManager.GetUserAsync((ClaimsPrincipal)User);
             var userName = user.UserName;
 
             // checking user role is admin or not
@@ -31,9 +31,9 @@ namespace UserInterface.ViewComponents
 
             var viewModel = new LayoutViewModel
             {
-                user_name = userName,
-                role = role,
-                _taskcount = _dataService.TaskCount(userName, role)
+                UserName = userName,
+                Role = role,
+                TaskCount = _dataService.TaskCount(userName, role)
             };
 
             return View(viewModel);

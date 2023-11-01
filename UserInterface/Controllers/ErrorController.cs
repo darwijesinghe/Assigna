@@ -48,16 +48,16 @@ namespace UserInterface.Controllers
             }
 
 
-            ErrorViewModel? error = new ErrorViewModel();
+            ErrorViewModel? error = new();
 
             // handle error page based on http status code
             switch (statuscode)
             {
                 case 404:
-                    error.status = 404;
+                    error.Status = 404;
                     break;
                 case 500:
-                    error.status = 500;
+                    error.Status = 500;
                     break;
             }
 
