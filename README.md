@@ -22,14 +22,7 @@ This application was created to showcase basic CRUD operations. Designed and dev
 
 - .NET Core 3.1
   - C #
-
-### Architecture
-
-- Three-Tier Architecture
-  - Domain Layer
-  - Service Layer
-  - Web Layer
-
+  
 ### Database
 
 - Microsoft SQL Server EF Core
