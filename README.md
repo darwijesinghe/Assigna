@@ -2,11 +2,9 @@
 
 ## Project Purpose
 
-This simple task management application was made to showcase my coding ability to those who would like to hire me as a .NET developer.
+This simple task management application was built to demonstrate my coding skills to potential employers interested in hiring me as a .NET developer.
 
-This app was mainly developed to demonstrate basic CRUD operations. This full app was designed and developed by myself. Assigna can use for a small team to simply manage their project tasks.
-
-Assigna live link - [https://assigna.azurewebsites.net](https://assigna.azurewebsites.net)
+This application was created to showcase basic CRUD operations. Designed and developed by myself, Assigna is ideal for small teams to manage their project tasks efficiently. It can also be scaled to include more advanced features as needed.
 
 ## Contributors
 
@@ -24,6 +22,13 @@ Assigna live link - [https://assigna.azurewebsites.net](https://assigna.azureweb
 
 - .NET Core 3.1
   - C #
+
+### Architecture
+
+- Three-Tier Architecture
+  - Domain Layer
+  - Service Layer
+  - Web Layer
 
 ### Database
 
@@ -82,20 +87,16 @@ Assigna live link - [https://assigna.azurewebsites.net](https://assigna.azureweb
 
 Team Lead
 
-- First Name: Manudi
-- Username: manudi@lead
-- Email Address
-  - team.mail.lead@gmail.com
-  - team@lead123
+- First Name: Harshi
+- Username: harshi@lead
+- Email Address: Any email address
 - Password: team@lead123
 
 Team Member
 
-- First Name: Peter
-- Username: peter@work
-- Email Address
-  - team.mail.member@gmail.com
-  - team@member123
+- First Name: Nadeesha
+- Username: nadeesha@work
+- Email Address: Any email address
 - Password: team@member123
 
 ## Support
