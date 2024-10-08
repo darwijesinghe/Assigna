@@ -5,7 +5,9 @@ namespace UserInterface.Models
     /// </summary>
     public class ErrorViewModel
     {
-        // data capture variables -----
+        /// <summary>
+        /// HTTP status code
+        /// </summary>
         public int Status { get; set; }
     }
 }

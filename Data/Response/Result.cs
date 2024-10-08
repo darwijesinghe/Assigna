@@ -18,6 +18,10 @@
         // Extra fields --------------------
         public int Id          { get; set; }
     }
+
+    /// <summary>
+    /// Generic response class
+    /// </summary>
     public class Result<T> where T : class
     {
         /// <summary>

@@ -6,7 +6,6 @@ using Services.Interfaces;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using UserInterface.Models;
-using UserInterface.Services;
 using static UserInterface.Models.ResetViewModel;
 
 namespace UserInterface.Controllers
@@ -18,16 +17,14 @@ namespace UserInterface.Controllers
         private SignInManager<IdentityUser>        _signinManager;
         private IMailService                       _mailSend;
         private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly ITaskService              _taskService;
         private readonly IUserService              _userService;
 
         [TempData]
         public string? AlertMessage { get; set; }
 
-        public AccountController(ITaskService taskService, IUserService userService, SignInManager<IdentityUser> signinManager,
+        public AccountController(IUserService userService, SignInManager<IdentityUser> signinManager,
         UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, IMailService mailSend)
         {
-            _taskService   = taskService;
             _userService   = userService;
             _signinManager = signinManager;
             _userManager   = userManager;

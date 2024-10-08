@@ -1,3 +1,4 @@
+using Domain.Classes;
 using Domain.Data;
 using Domain.Repositories.Classes;
 using Domain.Repositories.Interfaces;
