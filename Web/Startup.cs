@@ -135,8 +135,9 @@ namespace UserInterface
             app.UseRouting();
 
             // Aunthentication
-            // Authorization
             app.UseAuthentication();
+
+            // Authorization
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

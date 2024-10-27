@@ -24,10 +24,10 @@ namespace UserInterface.ViewComponents
         }
 
         /// <summary>
-        /// Invokes the view component, rendering its content
+        /// Invokes the view component, rendering its content.
         /// </summary>
         /// <returns>
-        /// A <see cref="IViewComponentResult"/> that represents the result of the view component invocation
+        /// A <see cref="IViewComponentResult"/> that represents the result of the view component invocation.
         /// </returns>
         public async Task<IViewComponentResult> InvokeAsync()
         {

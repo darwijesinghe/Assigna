@@ -10,19 +10,19 @@ namespace Services.Interfaces
     public interface IUserService
     {
         /// <summary>
-        /// Retrieves a list of all users
+        /// Retrieves a list of all users.
         /// </summary>
         /// <returns>
-        /// List of users as <see cref="UsersDto"/> objects
+        /// List of users as <see cref="UsersDto"/> objects.
         /// </returns>
         List<UsersDto> AllUsers();
 
         /// <summary>
-        /// Saves a new user to the system
+        /// Saves a new user to the system.
         /// </summary>
-        /// <param name="data">The user data as a <see cref="UsersDto"/> object</param>
+        /// <param name="data">The user data as a <see cref="UsersDto"/> object.</param>
         /// <returns>
-        /// A <see cref="Result"/> object indicating success or failure
+        /// A <see cref="Result"/> object indicating success or failure.
         /// </returns>
         Task<Result> SaveNewUserAsync(UsersDto data);
     }

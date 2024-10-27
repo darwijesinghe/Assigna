@@ -10,19 +10,19 @@ namespace Domain.Repositories.Interfaces
     public interface IUserRepository
     {
         /// <summary>
-        /// Retrieves a list of all users
+        /// Retrieves a list of all users.
         /// </summary>
         /// <returns>
-        /// List of users as <see cref="Users"/> objects
+        /// List of users as <see cref="Users"/> objects.
         /// </returns>
         List<Users> AllUsers();
 
         /// <summary>
-        /// Saves a new user to the system
+        /// Saves a new user to the system.
         /// </summary>
-        /// <param name="data">The user data as a <see cref="Users"/> object</param>
+        /// <param name="data">The user data as a <see cref="Users"/> object.</param>
         /// <returns>
-        /// A <see cref="Result"/> object indicating success or failure
+        /// A <see cref="Result"/> object indicating success or failure.
         /// </returns>
         Task<Result> SaveNewUserAsync(Users data);
     }

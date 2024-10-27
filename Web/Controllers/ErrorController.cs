@@ -16,10 +16,10 @@ namespace UserInterface.Controllers
         }
 
         /// <summary>
-        /// Handles application errors and displays the error page
+        /// Handles application errors and displays the error page.
         /// </summary>
         /// <returns>
-        /// An <see cref="IActionResult"/> that renders the error page
+        /// An <see cref="IActionResult"/> that renders the error page.
         /// </returns>
         [HttpGet]
         [Route("error")]
@@ -35,11 +35,11 @@ namespace UserInterface.Controllers
         }
 
         /// <summary>
-        /// Handles HTTP status codes and returns an appropriate response based on the provided status code
+        /// Handles HTTP status codes and returns an appropriate response based on the provided status code.
         /// </summary>
-        /// <param name="statuscode">The HTTP status code to handle. Defaults to 0, which may indicate a general error</param>
+        /// <param name="statuscode">The HTTP status code to handle. Defaults to 0, which may indicate a general error.</param>
         /// <returns>
-        /// An <see cref="IActionResult"/> representing the response corresponding to the specified HTTP status code
+        /// An <see cref="IActionResult"/> representing the response corresponding to the specified HTTP status code.
         /// </returns>
         [HttpGet]
         [Route("error/{statuscode}")]

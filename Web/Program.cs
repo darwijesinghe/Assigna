@@ -12,12 +12,12 @@ namespace UserInterface
         }
 
         /// <summary>
-        /// Configures and builds the application host with default settings and logging configuration
+        /// Configures and builds the application host with default settings and logging configuration.
         /// </summary>
-        /// <param name="args">Command-line arguments passed during application startup</param>
+        /// <param name="args">Command-line arguments passed during application startup.</param>
         /// <returns>
         /// An <see cref="IHostBuilder"/> configured with the default settings for the web application, 
-        /// including logging setup using NLog from the configuration
+        /// including logging setup using NLog from the configuration.
         /// </returns>
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)

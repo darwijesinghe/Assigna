@@ -36,10 +36,10 @@ namespace UserInterface.Controllers
         }
 
         /// <summary>
-        /// Retrieves and displays the list of tasks for the user
+        /// Retrieves and displays the list of tasks for the user.
         /// </summary>
         /// <returns>
-        /// An <see cref="IActionResult"/> that renders the tasks view with the user's task data
+        /// An <see cref="IActionResult"/> that renders the tasks view with the user's task data.
         /// </returns>
         [HttpGet]
         public async Task<IActionResult> Tasks()
@@ -50,10 +50,10 @@ namespace UserInterface.Controllers
         }
 
         /// <summary>
-        /// Retrieves and displays the pending list of tasks for the user
+        /// Retrieves and displays the pending list of tasks for the user.
         /// </summary>
         /// <returns>
-        /// An <see cref="IActionResult"/> that renders the tasks view with the user's task data
+        /// An <see cref="IActionResult"/> that renders the tasks view with the user's task data.
         /// </returns>
         [HttpGet]
         public async Task<IActionResult> Pending()
@@ -64,10 +64,10 @@ namespace UserInterface.Controllers
         }
 
         /// <summary>
-        /// Retrieves and displays the completed list of tasks for the user
+        /// Retrieves and displays the completed list of tasks for the user.
         /// </summary>
         /// <returns>
-        /// An <see cref="IActionResult"/> that renders the tasks view with the user's task data
+        /// An <see cref="IActionResult"/> that renders the tasks view with the user's task data.
         /// </returns>
         [HttpGet]
         public async Task<IActionResult> Complete()
@@ -78,10 +78,10 @@ namespace UserInterface.Controllers
         }
 
         /// <summary>
-        /// Retrieves and displays the high priority list of tasks for the user
+        /// Retrieves and displays the high priority list of tasks for the user.
         /// </summary>
         /// <returns>
-        /// An <see cref="IActionResult"/> that renders the tasks view with the user's task data
+        /// An <see cref="IActionResult"/> that renders the tasks view with the user's task data.
         /// </returns>
         [HttpGet("h-priority")]
         public async Task<IActionResult> HighPriority()
@@ -92,10 +92,10 @@ namespace UserInterface.Controllers
         }
 
         /// <summary>
-        /// Retrieves and displays the medium priority list of tasks for the user
+        /// Retrieves and displays the medium priority list of tasks for the user.
         /// </summary>
         /// <returns>
-        /// An <see cref="IActionResult"/> that renders the tasks view with the user's task data
+        /// An <see cref="IActionResult"/> that renders the tasks view with the user's task data.
         /// </returns>
         [HttpGet("m-priority")]
         public async Task<IActionResult> MediumPriority()
@@ -106,10 +106,10 @@ namespace UserInterface.Controllers
         }
 
         /// <summary>
-        /// Retrieves and displays the low priority list of tasks for the user
+        /// Retrieves and displays the low priority list of tasks for the user.
         /// </summary>
         /// <returns>
-        /// An <see cref="IActionResult"/> that renders the tasks view with the user's task data
+        /// An <see cref="IActionResult"/> that renders the tasks view with the user's task data.
         /// </returns>
         [HttpGet("l-priority")]
         public async Task<IActionResult> LowPriority()
@@ -120,10 +120,10 @@ namespace UserInterface.Controllers
         }
 
         /// <summary>
-        /// Displays the page for creating a new task
+        /// Displays the page for creating a new task.
         /// </summary>
         /// <returns>
-        /// An <see cref="IActionResult"/> that renders the new task creation view
+        /// An <see cref="IActionResult"/> that renders the new task creation view.
         /// </returns>
         [Authorize(Roles = Roles.lead)]
         [HttpGet("new-task")]
@@ -140,12 +140,12 @@ namespace UserInterface.Controllers
         }
 
         /// <summary>
-        /// Processes the request to add a new task using the provided task data
+        /// Processes the request to add a new task using the provided task data.
         /// </summary>
-        /// <param name="data">The new task information encapsulated in a <see cref="NewTaskViewModel"/> object</param>
+        /// <param name="data">The new task information encapsulated in a <see cref="NewTaskViewModel"/> object.</param>
         /// <returns>
         /// A <see cref="JsonResult"/> indicating the outcome of the task addition process, 
-        /// such as success or failure messages
+        /// such as success or failure messages.
         /// </returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -190,11 +190,11 @@ namespace UserInterface.Controllers
         }
 
         /// <summary>
-        /// Retrieves and displays detailed information about a specific task
+        /// Retrieves and displays detailed information about a specific task.
         /// </summary>
-        /// <param name="taskId">The unique identifier of the task whose information is to be retrieved</param>
+        /// <param name="taskId">The unique identifier of the task whose information is to be retrieved.</param>
         /// <returns>
-        /// An <see cref="IActionResult"/> that renders the task information view
+        /// An <see cref="IActionResult"/> that renders the task information view.
         /// </returns>
         [HttpGet("task-info")]
         public IActionResult TaskInfo(int taskId)
@@ -211,9 +211,9 @@ namespace UserInterface.Controllers
         /// <summary>
         /// Displays the page for editing a specific task based on its unique identifier
         /// </summary>
-        /// <param name="taskId">The unique identifier of the task to be edited</param>
+        /// <param name="taskId">The unique identifier of the task to be edited.</param>
         /// <returns>
-        /// An <see cref="IActionResult"/> that renders the task editing view
+        /// An <see cref="IActionResult"/> that renders the task editing view.
         /// </returns>
         [HttpGet("edit-task")]
         public IActionResult EditTask(int taskId)
@@ -245,12 +245,12 @@ namespace UserInterface.Controllers
         }
 
         /// <summary>
-        /// Processes the request to update an existing task with the provided data
+        /// Processes the request to update an existing task with the provided data.
         /// </summary>
-        /// <param name="data">The updated task information encapsulated in a <see cref="NewTaskViewModel"/> object</param>
+        /// <param name="data">The updated task information encapsulated in a <see cref="NewTaskViewModel"/> object.</param>
         /// <returns>
         /// A <see cref="JsonResult"/> indicating the outcome of the task update process, 
-        /// such as success or failure messages
+        /// such as success or failure messages.
         /// </returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -296,12 +296,12 @@ namespace UserInterface.Controllers
         }
 
         /// <summary>
-        /// Processes the request to delete a task identified by its unique identifier
+        /// Processes the request to delete a task identified by its unique identifier.
         /// </summary>
-        /// <param name="taskId">The unique identifier of the task to be deleted</param>
+        /// <param name="taskId">The unique identifier of the task to be deleted.</param>
         /// <returns>
         /// A <see cref="JsonResult"/> indicating the outcome of the task deletion process, 
-        /// such as success or failure messages
+        /// such as success or failure messages.
         /// </returns>
         [HttpPost]
         public async Task<JsonResult> DeleteTask(int taskId)
@@ -335,11 +335,11 @@ namespace UserInterface.Controllers
         }
 
         /// <summary>
-        /// Displays the page for adding a note to a specific task identified by its unique identifier
+        /// Displays the page for adding a note to a specific task identified by its unique identifier.
         /// </summary>
-        /// <param name="taskId">The unique identifier of the task to which the note will be added</param>
+        /// <param name="taskId">The unique identifier of the task to which the note will be added.</param>
         /// <returns>
-        /// An <see cref="IActionResult"/> that renders the note addition view for the specified task
+        /// An <see cref="IActionResult"/> that renders the note addition view for the specified task.
         /// </returns>
         [HttpGet("add-note")]
         public IActionResult AddNote(int taskId)
@@ -355,12 +355,12 @@ namespace UserInterface.Controllers
         }
 
         /// <summary>
-        /// Processes the request to add a note to a specific task using the provided note data
+        /// Processes the request to add a note to a specific task using the provided note data.
         /// </summary>
-        /// <param name="data">The note information encapsulated in an <see cref="AddNoteViewModel"/> object</param>
+        /// <param name="data">The note information encapsulated in an <see cref="AddNoteViewModel"/> object.</param>
         /// <returns>
         /// A <see cref="JsonResult"/> indicating the outcome of the note addition process, 
-        /// such as success or failure messages
+        /// such as success or failure messages.
         /// </returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -395,12 +395,12 @@ namespace UserInterface.Controllers
         }
 
         /// <summary>
-        /// Processes the request to mark a specific task as completed based on its unique identifier
+        /// Processes the request to mark a specific task as completed based on its unique identifier.
         /// </summary>
-        /// <param name="taskId">The unique identifier of the task to be marked as done</param>
+        /// <param name="taskId">The unique identifier of the task to be marked as done.</param>
         /// <returns>
         /// A <see cref="JsonResult"/> indicating the outcome of the task completion process, 
-        /// such as success or failure messages
+        /// such as success or failure messages.
         /// </returns>
         [HttpPost]
         public async Task<JsonResult> MarkasDone(int taskId)
@@ -431,12 +431,12 @@ namespace UserInterface.Controllers
         }
 
         /// <summary>
-        /// Processes the request to send a reminder based on the provided reminder data
+        /// Processes the request to send a reminder based on the provided reminder data.
         /// </summary>
-        /// <param name="data">The reminder information encapsulated in a <see cref="RemindViewModel"/> object</param>
+        /// <param name="data">The reminder information encapsulated in a <see cref="RemindViewModel"/> object.</param>
         /// <returns>
         /// A <see cref="JsonResult"/> indicating the outcome of the reminder sending process, 
-        /// such as success or failure messages
+        /// such as success or failure messages.
         /// </returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -484,11 +484,11 @@ namespace UserInterface.Controllers
         // Helpers ---------------------------------------------------------
 
         /// <summary>
-        /// Asynchronously retrieves a list of tasks based on the specified task type
+        /// Retrieves a list of tasks based on the specified task type.
         /// </summary>
-        /// <param name="type">The type of tasks to retrieve, specified by the <see cref="TaskType"/> enum</param>
+        /// <param name="type">The type of tasks to retrieve, specified by the <see cref="TaskType"/> enum.</param>
         /// <returns>
-        /// A <see cref="TaskViewModel"/> containing the list of tasks of the specified type
+        /// A <see cref="TaskViewModel"/> containing the list of tasks of the specified type.
         /// </returns>
         private async Task<TaskViewModel> TasksList(TaskType type)
         {
@@ -534,10 +534,10 @@ namespace UserInterface.Controllers
         }
 
         /// <summary>
-        /// Retrieves the count of tasks for use in AJAX requests
+        /// Retrieves the count of tasks for use in AJAX requests.
         /// </summary>
         /// <returns>
-        /// A <see cref="TaskCount"/> object containing the total number of tasks
+        /// A <see cref="TaskCount"/> object containing the total number of tasks.
         /// </returns>
         private async Task<TaskCount> TasksCount()
         {

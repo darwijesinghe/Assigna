@@ -23,12 +23,14 @@ namespace UserInterface.Services
         }
 
         /// <summary>
-        /// Sends an email to the specified recipient
+        /// Sends an email to the specified recipient.
         /// </summary>
-        /// <param name="to">The email address of the recipient</param>
-        /// <param name="subject">The subject of the email</param>
-        /// <param name="content">The body content of the email</param>
-        /// <returns>A <see cref="Task{Result}"/> representing the result of the email sending operation</returns>
+        /// <param name="to">The email address of the recipient.</param>
+        /// <param name="subject">The subject of the email.</param>
+        /// <param name="content">The body content of the email.</param>
+        /// <returns>
+        /// A <see cref="Task{Result}"/> representing the result of the email sending operation.
+        /// </returns>
         public async Task<Result> SendMailAsync(string to, string subject, string content)
         {
             // returns result
@@ -36,13 +38,13 @@ namespace UserInterface.Services
         }
 
         /// <summary>
-        /// Sets up the email with the specified recipient, subject, and content, and prepares it for sending
+        /// Sets up the email with the specified recipient, subject, and content, and prepares it for sending.
         /// </summary>
-        /// <param name="to">The email address of the recipient</param>
-        /// <param name="subject">The subject of the email</param>
-        /// <param name="content">The body content of the email</param>
+        /// <param name="to">The email address of the recipient.</param>
+        /// <param name="subject">The subject of the email.</param>
+        /// <param name="content">The body content of the email.</param>
         /// <returns>
-        /// A <see cref="Task{Result}"/> representing the asynchronous operation, containing the result of the email setup process
+        /// A <see cref="Task{Result}"/> representing the asynchronous operation, containing the result of the email setup process.
         /// </returns>
         private async Task<Result> SetupMailAsync(string to, string subject, string content)
         {
@@ -63,7 +65,7 @@ namespace UserInterface.Services
 
                     return new Result
                     {
-                        Message = "Success",
+                        Message = "Success.",
                         Success = true
                     };
 

@@ -22,10 +22,10 @@ namespace Domain.Repositories.Classes
         }
 
         /// <summary>
-        /// Retrieves a list of all users
+        /// Retrieves a list of all users.
         /// </summary>
         /// <returns>
-        /// List of users as <see cref="Users"/> objects
+        /// List of users as <see cref="Users"/> objects.
         /// </returns>
         public List<Users> AllUsers()
         {
@@ -50,11 +50,11 @@ namespace Domain.Repositories.Classes
         }
 
         /// <summary>
-        /// Saves a new user to the system
+        /// Saves a new user to the system.
         /// </summary>
-        /// <param name="data">The user data as a <see cref="Users"/> object</param>
+        /// <param name="data">The user data as a <see cref="Users"/> object.</param>
         /// <returns>
-        /// A <see cref="Result"/> object indicating success or failure
+        /// A <see cref="Result"/> object indicating success or failure.
         /// </returns>
         public async Task<Result> SaveNewUserAsync(Users data)
         {
@@ -66,7 +66,7 @@ namespace Domain.Repositories.Classes
                 await _context.SaveChangesAsync();
                 return new Result
                 {
-                    Message = "Ok",
+                     Message = "Ok.",
                     Success = true
                 };
             }

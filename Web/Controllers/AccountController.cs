@@ -33,11 +33,11 @@ namespace UserInterface.Controllers
         }
 
         /// <summary>
-        /// Handles the sign-in process for a user
+        /// Handles the sign-in process for a user.
         /// </summary>
         /// <returns>
         /// An <see cref="IActionResult"/> representing the result of the sign-in operation, 
-        /// which may include a redirect or view result
+        /// which may include a redirect or view result.
         /// </returns>
         [HttpGet]
         public async Task<IActionResult> SignIn()
@@ -55,12 +55,12 @@ namespace UserInterface.Controllers
         }
 
         /// <summary>
-        /// Processes the sign-in request using the provided sign-in data
+        /// Processes the sign-in request using the provided sign-in data.
         /// </summary>
-        /// <param name="data">The sign-in information encapsulated in a <see cref="SignInViewModel"/></param>
+        /// <param name="data">The sign-in information encapsulated in a <see cref="SignInViewModel"/>.</param>
         /// <returns>
         /// A <see cref="JsonResult"/> indicating the outcome of the sign-in operation, 
-        /// which may include success or error messages
+        /// which may include success or error messages.
         /// </returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -90,7 +90,7 @@ namespace UserInterface.Controllers
                     return Json(new
                     {
                         success   = true,
-                        message   = "Ok",
+                        message   = "Ok.",
                         returnurl = "/tasks"
                     });
 
@@ -107,12 +107,12 @@ namespace UserInterface.Controllers
         }
 
         /// <summary>
-        /// Handles OAuth authentication based on the specified provider and type
+        /// Handles OAuth authentication based on the specified provider and type.
         /// </summary>
-        /// <param name="provider">The OAuth provider (e.g., Google, Facebook, etc.) specified in the route</param>
-        /// <param name="type">An optional string representing the type of OAuth operation, if applicable</param>
+        /// <param name="provider">The OAuth provider (e.g., Google, Facebook, etc.) specified in the route.</param>
+        /// <param name="type">An optional string representing the type of OAuth operation, if applicable.</param>
         /// <returns>
-        /// An <see cref="IActionResult"/> representing the result of the OAuth authentication or operation
+        /// An <see cref="IActionResult"/> representing the result of the OAuth authentication or operation.
         /// </returns>
         [HttpPost, Route("oauth/{provider}.{type?}")]
         public IActionResult Oauth([FromRoute] string provider, [FromRoute] string? type)
@@ -143,11 +143,11 @@ namespace UserInterface.Controllers
         }
 
         /// <summary>
-        /// Handles Google authentication or operations based on the specified type
+        /// Handles Google authentication or operations based on the specified type.
         /// </summary>
-        /// <param name="type">A string representing the type of Google operation (e.g., sign-in, authentication, etc.)</param>
+        /// <param name="type">A string representing the type of Google operation (e.g., sign-in, authentication, etc.).</param>
         /// <returns>
-        /// An <see cref="IActionResult"/> representing the outcome of the Google operation
+        /// An <see cref="IActionResult"/> representing the outcome of the Google operation.
         /// </returns>
         [HttpGet]
         public async Task<IActionResult> Google(string type)
@@ -258,11 +258,11 @@ namespace UserInterface.Controllers
         }
 
         /// <summary>
-        /// Handles the sign-out process for the user
+        /// Handles the sign-out process for the user.
         /// </summary>
         /// <returns>
         /// An <see cref="IActionResult"/> representing the result of the sign-out operation, 
-        /// typically a redirect to a login page or homepage
+        /// typically a redirect to a login page or homepage.
         /// </returns>
         [HttpGet]
         public async Task<IActionResult> SignOut()
@@ -272,11 +272,11 @@ namespace UserInterface.Controllers
         }
 
         /// <summary>
-        /// Handles the sign-up process based on the specified type
+        /// Handles the sign-up process based on the specified type.
         /// </summary>
-        /// <param name="type">A string representing the type of user role (e.g. team-lead)</param>
+        /// <param name="type">A string representing the type of user role (e.g. team-lead).</param>
         /// <returns>
-        /// An <see cref="IActionResult"/> representing the result of the sign-up process
+        /// An <see cref="IActionResult"/> representing the result of the sign-up process.
         /// </returns>
         [HttpGet]
         public IActionResult SignUp(string type)
@@ -292,12 +292,12 @@ namespace UserInterface.Controllers
         }
 
         /// <summary>
-        /// Processes the user sign-up request using the provided sign-up data
+        /// Processes the user sign-up request using the provided sign-up data.
         /// </summary>
-        /// <param name="data">The sign-up information encapsulated in a <see cref="SignUpViewModel"/></param>
+        /// <param name="data">The sign-up information encapsulated in a <see cref="SignUpViewModel"/>.</param>
         /// <returns>
         /// A <see cref="JsonResult"/> indicating the outcome of the sign-up process, 
-        /// which may include success or error messages
+        /// which may include success or error messages.
         /// </returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -375,7 +375,7 @@ namespace UserInterface.Controllers
                 return Json(new
                 {
                     success   = true,
-                    message   = "Ok",
+                    message   = "Ok.",
                     returnurl = "/"
                 });
             }
@@ -390,10 +390,10 @@ namespace UserInterface.Controllers
         }
 
         /// <summary>
-        /// Displays the forgot password page or initiates the forgot password process
+        /// Displays the forgot password page or initiates the forgot password process.
         /// </summary>
         /// <returns>
-        /// An <see cref="IActionResult"/> that renders the forgot password page or handles related logic
+        /// An <see cref="IActionResult"/> that renders the forgot password page or handles related logic.
         /// </returns>
         [HttpGet("forgot-password")]
         public IActionResult ForgotPassword()
@@ -403,12 +403,12 @@ namespace UserInterface.Controllers
         }
 
         /// <summary>
-        /// Processes the request to send a password reset link to the user's email
+        /// Processes the request to send a password reset link to the user's email.
         /// </summary>
-        /// <param name="data">The reset link information encapsulated in a <see cref="SendResetLink"/> object</param>
+        /// <param name="data">The reset link information encapsulated in a <see cref="SendResetLink"/> object.</param>
         /// <returns>
         /// A <see cref="JsonResult"/> indicating the result of the operation, 
-        /// such as success or failure messages
+        /// such as success or failure messages.
         /// </returns>
         [HttpPost, ActionName("forgot-password")]
         [ValidateAntiForgeryToken]
@@ -462,12 +462,12 @@ namespace UserInterface.Controllers
         }
 
         /// <summary>
-        /// Displays the password reset page or initiates the password reset process using the provided token and email
+        /// Displays the password reset page or initiates the password reset process using the provided token and email.
         /// </summary>
-        /// <param name="token">The password reset token sent to the user</param>
-        /// <param name="email">The user's email address for which the password reset is being performed</param>
+        /// <param name="token">The password reset token sent to the user.</param>
+        /// <param name="email">The user's email address for which the password reset is being performed.</param>
         /// <returns>
-        /// An <see cref="IActionResult"/> that renders the reset password page or handles the reset process
+        /// An <see cref="IActionResult"/> that renders the reset password page or handles the reset process.
         /// </returns>
         [HttpGet("reset-password")]
         public IActionResult ResetPassword(string token, string email)
@@ -477,12 +477,12 @@ namespace UserInterface.Controllers
         }
 
         /// <summary>
-        /// Processes the password reset request using the provided reset data
+        /// Processes the password reset request using the provided reset data.
         /// </summary>
-        /// <param name="data">The password reset information encapsulated in a <see cref="ResetViewModel"/> object</param>
+        /// <param name="data">The password reset information encapsulated in a <see cref="ResetViewModel"/> object.</param>
         /// <returns>
         /// A <see cref="JsonResult"/> indicating the outcome of the password reset process, 
-        /// such as success or failure messages
+        /// such as success or failure messages.
         /// </returns>
         [HttpPost, ActionName("reset-password")]
         [ValidateAntiForgeryToken]

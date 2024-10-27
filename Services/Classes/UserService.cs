@@ -21,10 +21,10 @@ namespace Services.Classes
         }
 
         /// <summary>
-        /// Retrieves a list of all users
+        /// Retrieves a list of all users.
         /// </summary>
         /// <returns>
-        /// List of users as <see cref="UsersDto"/> objects
+        /// List of users as <see cref="UsersDto"/> objects.
         /// </returns>
         public List<UsersDto> AllUsers()
         {
@@ -36,11 +36,11 @@ namespace Services.Classes
         }
 
         /// <summary>
-        /// Saves a new user to the system
+        /// Saves a new user to the system.
         /// </summary>
-        /// <param name="data">The user data as a <see cref="UsersDto"/> object</param>
+        /// <param name="data">The user data as a <see cref="UsersDto"/> object.</param>
         /// <returns>
-        /// A <see cref="Result"/> object indicating success or failure
+        /// A <see cref="Result"/> object indicating success or failure.
         /// </returns>
         public async Task<Result> SaveNewUserAsync(UsersDto data)
         {
@@ -60,11 +60,11 @@ namespace Services.Classes
         /// <summary>
         /// Converts a single <see cref="Users"/> entity to a <see cref="UsersDto"/> object. Maps all 
         /// relevant properties from the <see cref="Users"/> entity to the corresponding 
-        /// properties in <see cref="UsersDto"/>
+        /// properties in <see cref="UsersDto"/>.
         /// </summary>
-        /// <param name="task">The <see cref="Users"/> entity to be converted</param>
+        /// <param name="task">The <see cref="Users"/> entity to be converted.</param>
         /// <returns>
-        /// A <see cref="UsersDto"/> object containing the mapped data
+        /// A <see cref="UsersDto"/> object containing the mapped data.
         /// </returns>
         private UsersDto ConvertToUserDto(Users users)
         {
