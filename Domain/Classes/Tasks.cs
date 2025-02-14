@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 namespace Domain.Classes
 {
     /// <summary>
-    /// Domain class for tasks
+    /// Domain class for tasks.
     /// </summary>
     public class Tasks
     {

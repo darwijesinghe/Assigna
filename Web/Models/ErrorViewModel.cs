@@ -1,7 +1,7 @@
 namespace UserInterface.Models
 {
     /// <summary>
-    /// View model for errors
+    /// View model for errors.
     /// </summary>
     public class ErrorViewModel
     {

@@ -1,16 +1,16 @@
-using System;
-using System.Threading.Tasks;
-using MimeKit;
-using MimeKit.Text;
+using Domain.Classes;
 using MailKit.Net.Smtp;
 using MailKit.Security;
+using MimeKit;
+using MimeKit.Text;
 using Services.Interfaces;
-using Domain.Classes;
+using System;
+using System.Threading.Tasks;
 
 namespace UserInterface.Services
 {
     /// <summary>
-    /// Mail service implementation
+    /// Mail service implementation.
     /// </summary>
     public class MailService : IMailService
     {

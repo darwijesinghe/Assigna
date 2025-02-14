@@ -1,7 +1,7 @@
 namespace UserInterface.Models
 {
     /// <summary>
-    /// View model for user signup
+    /// View model for user signup.
     /// </summary>
     public class SignUpViewModel
     {

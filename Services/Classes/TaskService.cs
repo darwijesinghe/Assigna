@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Services.Classes
 {
     /// <summary>
-    /// Service implementation for ITaskService
+    /// Service implementation for ITaskService.
     /// </summary>
     public class TaskService : ITaskService
     {

@@ -1,7 +1,7 @@
 ﻿namespace UserInterface.Models
 {
     /// <summary>
-    /// View model for user signin
+    /// View model for user signing.
     /// </summary>
     public class SignInViewModel
     {

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Domain.Repositories.Classes
 {
     /// <summary>
-    /// Repository implementation for user operations
+    /// Repository implementation for user operations.
     /// </summary>
     public class UserRepository : IUserRepository
     {

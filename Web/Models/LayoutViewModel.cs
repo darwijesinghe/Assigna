@@ -1,10 +1,10 @@
-using System.Collections.Generic;
 using Domain.Classes;
+using System.Collections.Generic;
 
 namespace UserInterface.Models
 {
     /// <summary>
-    /// View model for layout
+    /// View model for layout.
     /// </summary>
     public class LayoutViewModel
     {

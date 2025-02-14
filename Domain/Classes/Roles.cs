@@ -1,7 +1,7 @@
 namespace Domain.Classes
 {
     /// <summary>
-    /// Application user roles
+    /// Application user roles.
     /// </summary>
     public static class Roles
     {

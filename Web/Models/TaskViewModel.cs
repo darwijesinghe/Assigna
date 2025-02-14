@@ -1,11 +1,11 @@
-using System.Collections.Generic;
 using Domain.Classes;
 using Domain.Enums;
+using System.Collections.Generic;
 
 namespace UserInterface.Models
 {
     /// <summary>
-    /// View model for tasks
+    /// View model for tasks.
     /// </summary>
     public class TaskViewModel
     {

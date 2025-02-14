@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using Domain.Classes;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using Domain.Classes;
 
 namespace Domain.Repositories.Interfaces
 {
     /// <summary>
-    /// Repository interface for task related operations
+    /// Repository interface for task related operations.
     /// </summary>
     public interface ITaskRepository
     {

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 namespace Services.Interfaces
 {
     /// <summary>
-    /// Service interface for task related operations
+    /// Service interface for task related operations.
     /// </summary>
     public interface ITaskService
     {

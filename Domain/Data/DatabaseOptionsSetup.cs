@@ -4,7 +4,7 @@ using Microsoft.Extensions.Options;
 namespace Domain.Data
 {
     /// <summary>
-    /// DB option class
+    /// DB option class.
     /// </summary>
     public class DatabaseOptions
     {

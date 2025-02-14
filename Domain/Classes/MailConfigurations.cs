@@ -1,7 +1,7 @@
 ﻿namespace Domain.Classes
 {
     /// <summary>
-    /// Mail configuration class
+    /// Mail configuration class.
     /// </summary>
     public class MailConfigurations
     {

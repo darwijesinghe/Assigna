@@ -1,7 +1,7 @@
 ﻿namespace Domain.Enums
 {
     /// <summary>
-    /// Task type enums
+    /// Task type enums.
     /// </summary>
     public enum  TaskType
     {

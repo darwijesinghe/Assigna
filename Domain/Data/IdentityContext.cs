@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Domain.Data
 {
     /// <summary>
-    /// Identity db context class
+    /// Identity db context class.
     /// </summary>
     public class IdentityContext : IdentityDbContext
     {

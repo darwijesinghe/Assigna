@@ -1,15 +1,15 @@
-using System.Threading.Tasks;
+using Domain.Classes;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using UserInterface.Models;
-using System.Security.Claims;
 using Services.Interfaces;
-using Domain.Classes;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using UserInterface.Models;
 
 namespace UserInterface.ViewComponents
 {
     /// <summary>
-    /// Navigation component class
+    /// Navigation component class.
     /// </summary>
     public class NavigateViewComponent : ViewComponent
     {

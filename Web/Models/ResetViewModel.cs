@@ -1,7 +1,7 @@
 namespace UserInterface.Models
 {
     /// <summary>
-    /// View model for password reset
+    /// View model for password reset.
     /// </summary>
     public class ResetViewModel
     {

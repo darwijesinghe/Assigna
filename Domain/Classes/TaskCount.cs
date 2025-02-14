@@ -1,7 +1,7 @@
 namespace Domain.Classes
 {
     /// <summary>
-    /// Task count domain class
+    /// Task count domain class.
     /// </summary>
     public class TaskCount
     {

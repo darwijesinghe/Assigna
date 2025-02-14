@@ -1,7 +1,7 @@
 ﻿namespace Domain.Classes
 {
     /// <summary>
-    /// Response class for the methods
+    /// Response class for the methods.
     /// </summary>
     public class Result
     {

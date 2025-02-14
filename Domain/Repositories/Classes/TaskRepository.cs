@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Domain.Repositories.Classes
 {
     /// <summary>
-    /// Repository implementation for task operations
+    /// Repository implementation for task operations.
     /// </summary>
     public class TaskRepository : ITaskRepository
     {
